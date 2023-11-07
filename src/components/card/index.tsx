@@ -1,53 +1,28 @@
-export const Card = () => {
+"use client";
+import Image from "next/image";
+
+interface props {
+	animeSeasonsNow: any;
+}
+
+export const Card = ({ animeSeasonsNow }: props) => {
 	return (
-		<div className='carousel carousel-center p-2 space-x-1 w-full'>
-			<div className='carousel-item'>
-                <div className="relative cursor-pointer">
-                    <img
-                        src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-                        className='rounded-box'
-                    />
-                    <div className="absolute bottom-0 rounded-b-box p-2 bg-black w-full bg-opacity-5">
-                        <h3 className="font-serif">asas</h3>
-                    </div>
-                </div>
-			</div>
-			<div className='carousel-item'>
-				<img
-					src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-					className='rounded-box'
-				/>
-			</div>
-			<div className='carousel-item'>
-				<img
-					src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-					className='rounded-box'
-				/>
-			</div>
-			<div className='carousel-item'>
-				<img
-					src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-					className='rounded-box'
-				/>
-			</div>
-			<div className='carousel-item'>
-				<img
-					src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-					className='rounded-box'
-				/>
-			</div>
-			<div className='carousel-item'>
-				<img
-					src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-					className='rounded-box'
-				/>
-			</div>
-			<div className='carousel-item'>
-				<img
-					src='https://cdn.myanimelist.net/images/anime/1188/136926.jpg'
-					className='rounded-box'
-				/>
-			</div>
+		<div className='grid grid-cols-5 gap-2'>
+			{animeSeasonsNow.data.map((res: any, i: number) => {
+				return (
+					<div className='w-full p-2 relative cursor-pointer' key={i}>
+						<Image
+							src={res.images.jpg.image_url}
+							width={100}
+							height={100}
+							alt='images anime'
+						/>
+						<div className='absolute bottom-0 rounded-b-box p-2 bg-black w-full bg-opacity-5'>
+							<h3 className='font-serif'>{ res.title }</h3>
+						</div>
+					</div>
+				);
+			})}
 		</div>
 	);
 };
