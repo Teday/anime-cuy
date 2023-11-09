@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
 	env: {
 		base_url: 'https://api.jikan.moe/v4',
 	},

@@ -13,18 +13,18 @@ const Page = () => {
     }
 
 	return (
-		<main className='flex min-h-screen flex-col items-center justify-between'>
+		<main className='flex flex-col items-center justify-between'>
 			<Layout>
-				<div className='pt-20'>
-					<div className='flex w-screen h-full items-center justify-center'>
+				<div className='h-screen'>
+					<div className='flex w-screen items-center justify-center'>
 						<p className='text-black text-[200px]'>🙏</p>
 					</div>
-					<div className='flex w-screen h-full items-center justify-center'>
+					<div className='flex w-screen items-center justify-center'>
 						<p className='text-black text-4xl'>
 							Halaman Tidak Ada
 						</p>
 					</div>
-					<div className='flex w-screen h-full items-center justify-center pt-4'>
+					<div className='flex w-screen items-center justify-center pt-4'>
 						<button className='text-black font-semibold cursor-pointer hover:text-yellow-600 underline text-xl' onClick={backPage}>Kembali</button>
 					</div>
 				</div>

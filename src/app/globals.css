@@ -32,7 +32,7 @@
   width: 100px;
   height: 100px;
   display: grid;
-  color:hsl(var(--b1));
+  color: #ffff;
   background: radial-gradient(farthest-side, currentColor calc(100% - 12px),#0000 calc(100% - 10px) 0);
   -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 26px),#000 calc(100% - 24px));
   border-radius: 50%;

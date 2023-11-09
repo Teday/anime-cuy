@@ -1,32 +1,43 @@
 "use client";
 
-import { Layout } from "@/components";
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from "react";
+import { Layout, ListPage, Paginations } from "@/components";
+import { mostPopuler } from "@/libs";
 
 const Page = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [anime, setAnime] = useState<any>([]);
+	const [page, setPage] = useState<number>(1);
+	const [totalPage, setTotalPage] = useState<number>(1);
+	const [totalData, setTotalData] = useState<number>(0);
 
-    const router = useRouter()
+	useEffect(() => {
+		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [page]);
 
-    const backPage = (e: any) => {
-        e.preventDefault();
-        router.back()
-    }
+	const fetchData = async () => {
+		setIsLoading(true);
+		const animePopuler = await mostPopuler(20, page);
+		setTotalPage(animePopuler.pagination.last_visible_page)
+		setAnime(animePopuler);
+		setTotalData(animePopuler.pagination.items.total);
+		setIsLoading(false);
+	};
 
 	return (
-		<main className='flex min-h-screen flex-col items-center justify-between'>
+		<main className='flex flex-col items-center justify-between'>
 			<Layout>
-				<div className='pt-20'>
-					<div className='flex w-screen h-full items-center justify-center'>
-						<p className='text-black text-[200px]'>🙏</p>
-					</div>
-					<div className='flex w-screen h-full items-center justify-center'>
-						<p className='text-black text-4xl'>
-							Halaman Ini Masih Dalam Tahap Pengembangan
-						</p>
-					</div>
-					<div className='flex w-screen h-full items-center justify-center pt-4'>
-						<button className='text-black font-semibold cursor-pointer hover:text-yellow-600 underline text-xl' onClick={backPage}>Kembali</button>
-					</div>
+				<ListPage
+					anime={anime}
+					title={`Anime Populer`}
+					total={totalData}
+					isLoading={isLoading}
+				/>
+				<div className='flex justify-center p-2'>
+					{ isLoading ? null : (
+						<Paginations currentPage={page} totalPage={totalPage} nextPage={page + 1} prevPage={page - 1} setPage={setPage}/>
+					) }
 				</div>
 			</Layout>
 		</main>
