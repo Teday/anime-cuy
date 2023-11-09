@@ -1,7 +1,23 @@
-export const SeasonsNow = async ( limit: number ) => {
+export const seasonsNow = async ( limit: number ) => {
 
-	const response = await fetch(`${process.env.base_url}/seasons/now?limit=${limit}`, {cache: 'no-store'});
-	const animeTop = await response.json()
-    return animeTop
+	const response = await fetch(`${process.env.base_url}/seasons/now?limit=${limit}`);
+	const anime = await response.json()
+    return anime
+
+};
+
+export const mostPopuler = async ( limit: number ) => {
+
+	const response = await fetch(`${process.env.base_url}/top/anime?limit=${limit}`);
+	const anime = await response.json()
+    return anime
+
+};
+
+export const searchAnime = async ( search: string, page: number, limit: number ) => {
+
+	const response = await fetch(`${process.env.base_url}/anime?q=${search}&limit=${limit}&page${page}`);
+	const anime = await response.json()
+    return anime
 
 };

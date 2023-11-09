@@ -6,7 +6,7 @@ export const Layout = (props: PropsWithChildren) => {
 	return (
 		<div className='w-full h-full'>
             <Header />
-			<div className="bg-gray-300">
+			<div className="bg-gray-300 h-screen">
 				{props.children}
 			</div>
 			<Footer />
