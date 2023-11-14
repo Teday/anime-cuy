@@ -3,7 +3,6 @@ import { getAnime, getAnimeNested } from '@/libs';
 
 const AnimePage = async () => {
 
-	const animeSeasonsNow = await getAnime("seasons/now?limit=15")
 	const animePopuler = await getAnime("top/anime?limit=15")
 	const animeLastUpdate = await getAnime("watch/episodes?limit=15")
 	const animeRecommendations = await getAnimeNested("recommendations/anime", "entry")
@@ -11,10 +10,9 @@ const AnimePage = async () => {
 	return (
 		<main className='flex min-h-screen flex-col items-center justify-between'>
 			<Layout>
-				<List anime={animeSeasonsNow} title={`${animeSeasonsNow.data[0].season} ${animeSeasonsNow.data[0].year}`} url="/anime/season" episode={false}/>
 				<List anime={animePopuler} title="Top Anime" url="/anime/top" episode={false}/>
-				<List anime={animeLastUpdate} title="Last Update" url="" episode={true}/>
 				<List anime={animeRecommendations} title="Anime Rekomendasi" url="" episode={false}/>
+				<List anime={animeLastUpdate} title="Last Update" url="" episode={true}/>
 			</Layout>
 		</main>
 	);
