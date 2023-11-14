@@ -47,6 +47,15 @@ const Page = ({ params }: props) => {
 							<div className='flex w-screen h-screen items-center justify-center'>
 								<div className='custom-loader'></div>
 							</div>
+						) : anime.data === undefined ? (
+							<div className='h-screen'>
+								<div className='flex items-center justify-center'>
+									<p className=' text-[200px]'>🙏</p>
+								</div>
+								<div className='flex items-center justify-center'>
+									<p className='text-white text-4xl'>Data Tidak ditemukan</p>
+								</div>
+							</div>
 						) : (
 							<div className='flex sm:flex-nowrap flex-wrap w-full'>
 								<div className='p-2 sm:w-1/3 w-full'>
@@ -167,11 +176,41 @@ const Page = ({ params }: props) => {
 												Statistics
 											</div>
 											<div className='collapse-content'>
-												<p className='text-xs mb-1'>Score: {anime.data?.score === null ? "?" : formatNumber(anime.data?.score)} (score by {anime.data?.scored_by === null ? '?' : formatNumber(anime.data?.scored_by)} users)</p>
-												<p className='text-xs mb-1'>Ranked: {anime.data?.rank === null ? "?" : formatNumber(anime.data?.rank)}</p>
-												<p className='text-xs mb-1'>Popularity: {anime.data?.popularity === null ? "?" : formatNumber(anime.data?.popularity)}</p>
-												<p className='text-xs mb-1'>Members: {anime.data?.members === null ? "?" : formatNumber(anime.data?.members)}</p>
-												<p className='text-xs mb-1'>Favorites: {anime.data?.favorites === null ? "?" : formatNumber(anime.data?.favorites)}</p>
+												<p className='text-xs mb-1'>
+													Score:{" "}
+													{anime.data?.score === null
+														? "?"
+														: formatNumber(anime.data?.score)}{" "}
+													(score by{" "}
+													{anime.data?.scored_by === null
+														? "?"
+														: formatNumber(anime.data?.scored_by)}{" "}
+													users)
+												</p>
+												<p className='text-xs mb-1'>
+													Ranked:{" "}
+													{anime.data?.rank === null
+														? "?"
+														: formatNumber(anime.data?.rank)}
+												</p>
+												<p className='text-xs mb-1'>
+													Popularity:{" "}
+													{anime.data?.popularity === null
+														? "?"
+														: formatNumber(anime.data?.popularity)}
+												</p>
+												<p className='text-xs mb-1'>
+													Members:{" "}
+													{anime.data?.members === null
+														? "?"
+														: formatNumber(anime.data?.members)}
+												</p>
+												<p className='text-xs mb-1'>
+													Favorites:{" "}
+													{anime.data?.favorites === null
+														? "?"
+														: formatNumber(anime.data?.favorites)}
+												</p>
 											</div>
 										</div>
 									</div>
@@ -183,52 +222,72 @@ const Page = ({ params }: props) => {
 												type='radio'
 												name='my_tabs_1'
 												className='tab'
-												onChange={() => setActiveTabs('detail')}
+												onChange={() => setActiveTabs("detail")}
 												aria-label='Details'
-												checked={ activeTabs === 'detail' ? true : false }
+												checked={activeTabs === "detail" ? true : false}
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
 												className='tab'
-												onChange={() => setActiveTabs('char')}
+												onChange={() => setActiveTabs("char")}
 												aria-label='Character'
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
 												className='tab'
-												onChange={() => setActiveTabs('episode')}
+												onChange={() => setActiveTabs("episode")}
 												aria-label='Episodes'
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
 												className='tab'
-												onChange={() => setActiveTabs('stats')}
+												onChange={() => setActiveTabs("stats")}
 												aria-label='Stats'
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
 												className='tab'
-												onChange={() => setActiveTabs('review')}
+												onChange={() => setActiveTabs("review")}
 												aria-label='Reviews'
 											/>
 										</div>
-										<div className={`w-full ${activeTabs === 'detail' ? 'visible' : 'hidden'}`}>
+										<div
+											className={`w-full ${
+												activeTabs === "detail" ? "visible" : "hidden"
+											}`}
+										>
 											<Detail anime={anime} />
 										</div>
-										<div className={`w-full ${activeTabs === 'char' ? 'visible' : 'hidden'}`}>
+										<div
+											className={`w-full ${
+												activeTabs === "char" ? "visible" : "hidden"
+											}`}
+										>
 											<Char />
 										</div>
-										<div className={`w-full ${activeTabs === 'episode' ? 'visible' : 'hidden'}`}>
+										<div
+											className={`w-full ${
+												activeTabs === "episode" ? "visible" : "hidden"
+											}`}
+										>
 											<Char />
 										</div>
-										<div className={`w-full ${activeTabs === 'stats' ? 'visible' : 'hidden'}`}>
+										<div
+											className={`w-full ${
+												activeTabs === "stats" ? "visible" : "hidden"
+											}`}
+										>
 											<Char />
 										</div>
-										<div className={`w-full ${activeTabs === 'review' ? 'visible' : 'hidden'}`}>
+										<div
+											className={`w-full ${
+												activeTabs === "review" ? "visible" : "hidden"
+											}`}
+										>
 											<Char />
 										</div>
 									</div>
