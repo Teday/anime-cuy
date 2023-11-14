@@ -6,7 +6,7 @@ export const scroolTop = () => {
 };
 
 export const randomAnime = ( anime: any, gap: number ) => {
-	let first: number = Math.floor(Math.random() * anime.length - gap) + 1;
+	let first: number = Math.floor(Math.random() * anime?.length - gap) + 1;
 	let last: number = first + gap;
 	return { data: anime.slice(first, last)}
 };
@@ -14,7 +14,7 @@ export const randomAnime = ( anime: any, gap: number ) => {
 export const formatNumber = (data: number) => {
     let number_string = data.toString().replace(/[^,\d]/g, '');
     let split = number_string.split(',');
-    let sisa = split[0].length % 3;
+    let sisa = split[0]?.length % 3;
     let number = split[0].substr(0, sisa);
     let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 

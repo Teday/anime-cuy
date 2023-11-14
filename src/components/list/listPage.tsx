@@ -59,17 +59,17 @@ export const ListPage = ({ isLoading, anime }: props) => {
 									Type: {res.type}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Studio: {res.studios.length > 0 ? res.studios[0].name : "-"}
+									Studio: {res.studios?.length > 0 ? res.studios[0].name : "-"}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									Source: {res.source}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Theme: {res.themes.length > 0 ? res.themes[0].name : "-"}
+									Theme: {res.themes?.length > 0 ? res.themes[0].name : "-"}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									Demographic:{" "}
-									{res.demographics.length > 0 ? res.demographics[0].name : "-"}
+									{res.demographics?.length > 0 ? res.demographics[0].name : "-"}
 								</p>
 							</div>
 							<div className='grid grid-cols-2 gap-2 rounded-b-box bottom-0'>
