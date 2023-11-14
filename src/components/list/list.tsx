@@ -33,7 +33,7 @@ export const List = ({ anime, title, url, episode }: props) => {
 				</div>
 				<div className='w-full bg-gray-500 rounded-b-lg'>
 					<div className='flex p-2 overflow-x-auto'>
-						{anime.data.map((res: any, i: number) => {
+						{anime.data?.map((res: any, i: number) => {
 							return (
 								<Link
 									href={`${ episode ? `/anime/${res.entry.mal_id}` : `/anime/${res.mal_id}` }`}

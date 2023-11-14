@@ -12,7 +12,7 @@ export const InputSearch = () => {
     const handleSearch = (e:any) => {
         e.preventDefault();
         const keyword:string = searchRef.current?.value || ""
-        if(keyword.length > 0 && !keyword.startsWith(" ")){
+        if(keyword?.length > 0 && !keyword.startsWith(" ")){
             router.push(`/anime/search/${keyword}`)
         }
     }
@@ -26,7 +26,7 @@ export const InputSearch = () => {
                 className="input input-bordered w-full max-w-xs h-8 text-black bg-gray-300 p-3 placeholder-black"
                 ref={searchRef}
                 onKeyUp={ (e: any) => {
-                    if(e.code === 'Enter' && e.target.value.length > 0 && !e.target.value.startsWith(" ")){
+                    if(e.code === 'Enter' && e.target.value?.length > 0 && !e.target.value.startsWith(" ")){
                         router.push(`/anime/search/${e.target.value}`)
                     }
                 }}
