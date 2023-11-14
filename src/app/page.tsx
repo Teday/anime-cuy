@@ -6,7 +6,10 @@ const Page = async () => {
 	const animeSeasonsNow = await getAnime("seasons/now?limit=15")
 	const animePopuler = await getAnime("top/anime?limit=15")
 	const animeLastUpdate = await getAnime("watch/episodes?limit=15")
-	const animeRecommendations = await getAnimeNested("recommendations/anime", "entry")
+	let animeRecommendations: any
+	if(animeLastUpdate){
+		animeRecommendations = await getAnimeNested("recommendations/anime", "entry")
+	}
 	
 	return (
 		<main className='flex min-h-screen flex-col items-center justify-between'>

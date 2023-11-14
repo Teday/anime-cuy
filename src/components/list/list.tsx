@@ -10,7 +10,7 @@ interface props {
 }
 
 export const List = ({ anime, title, url, episode }: props) => {
-	console.log(anime)
+	
 	return (
 		<div className='w-full snap-x rounded-box lg:px-6 md:px-4 p-2'>
 			<div className='card shadow-xl'>
