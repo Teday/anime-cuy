@@ -3,6 +3,7 @@
 import { Star } from "@phosphor-icons/react";
 import Image from "next/image";
 import { NoData } from "./noData";
+import Link from "next/link";
 
 interface props {
 	isLoading: boolean;
@@ -11,7 +12,7 @@ interface props {
 
 export const ListPage = ({ isLoading, anime }: props) => {
 	return (
-		<div className='grid l:grid-cols-5 m:grid-cols-3 s:grid-cols-2 gap-4 p-2'>
+		<div className='grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 p-2'>
 			{isLoading ? (
 				<div className='flex w-screen h-screen items-center justify-center'>
 					<div className='custom-loader'></div>
@@ -21,7 +22,8 @@ export const ListPage = ({ isLoading, anime }: props) => {
 			) : (
 				anime.data?.map((res: any, i: number) => {
 					return (
-						<div
+						<Link
+							href={`/anime/${res.mal_id}`}
 							className='card w-full h-[400px] bg-base-100 shadow-xl'
 							key={i}
 						>
@@ -83,7 +85,7 @@ export const ListPage = ({ isLoading, anime }: props) => {
 									</p>
 								</div>
 							</div>
-						</div>
+						</Link>
 					);
 				})
 			)}

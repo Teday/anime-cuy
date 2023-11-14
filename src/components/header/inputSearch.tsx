@@ -22,7 +22,7 @@ export const InputSearch = () => {
         <div className="relative">
             <input 
                 type="text"
-                placeholder="Cari Anime"
+                placeholder="Search Anime"
                 className="input input-bordered w-full max-w-xs h-8 text-black bg-gray-300 p-3 placeholder-black"
                 ref={searchRef}
                 onKeyUp={ (e: any) => {

@@ -1,0 +1,245 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Layout, Detail, Char } from "@/components";
+import { getAnime } from "@/libs";
+import { scroolTop, formatNumber } from "@/utils";
+import Image from "next/image";
+
+interface props {
+	params: {
+		id: string;
+	};
+}
+
+const Page = ({ params }: props) => {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isInformasi, setIsInformasi] = useState<boolean>(true);
+	const [isStatistic, setIsStatistic] = useState<boolean>(true);
+	const [activeTabs, setActiveTabs] = useState<string>("detail");
+	const [anime, setAnime] = useState<any>([]);
+
+	useEffect(() => {
+		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const fetchData = async () => {
+		scroolTop();
+		const animeDetail = await getAnime(`anime/${params.id}/full`);
+		setAnime(animeDetail);
+		setIsLoading(false);
+	};
+
+	return (
+		<main className='flex flex-col items-center justify-between'>
+			<Layout>
+				<div className='w-full snap-x rounded-box sm:px-6 md:px-4 py-2 px-2'>
+					<div className='card shadow-xl bg-gray-700'>
+						<div className='bg-base-100 w-full rounded-t-lg p-2'>
+							<div className='w-full lg:text-left md:text-left text-center'>
+								<h5 className='lg:pl-6 md:pl-6 font-semibold lg:text-xl md:text-base text-sm'>
+									{anime.data?.title}
+								</h5>
+							</div>
+						</div>
+						{isLoading ? (
+							<div className='flex w-screen h-screen items-center justify-center'>
+								<div className='custom-loader'></div>
+							</div>
+						) : (
+							<div className='flex sm:flex-nowrap flex-wrap w-full'>
+								<div className='p-2 sm:w-1/3 w-full'>
+									<div className='p-1 lg:border lg:border-white md:border md:border-white'>
+										<Image
+											className='w-full object-cover rounded-md'
+											src={anime.data?.images.jpg.image_url}
+											width={250}
+											height={250}
+											alt='images anime'
+										/>
+									</div>
+									<div className='p-1 lg:border lg:border-white lg:border-t-0 md:border md:border-white md:border-t-0'>
+										<div
+											className='collapse collapse-arrow'
+											onClick={() => setIsInformasi(!isInformasi)}
+										>
+											<input type='checkbox' checked={isInformasi} />
+											<div className='collapse-title text-xl font-medium'>
+												Information
+											</div>
+											<div className='collapse-content'>
+												<p className='text-xs mb-1'>Type: {anime.data?.type}</p>
+												<p className='text-xs mb-1'>
+													Episodes: {anime.data?.episodes}
+												</p>
+												<p className='text-xs mb-1'>
+													Status: {anime.data?.status}
+												</p>
+												<p className='text-xs mb-1'>
+													Aired: {anime.data?.aired?.string}
+												</p>
+												<p className='text-xs mb-1'>
+													Season: {anime.data?.season} {anime.data?.year}
+												</p>
+												<p className='text-xs mb-1'>
+													Broadcast: {anime.data?.broadcast?.string}
+												</p>
+												<p className='text-xs mb-1'>
+													Producers:{" "}
+													{anime.data?.producers?.map(
+														(producer: any, i: number, idx: any) => {
+															return (
+																<span key={i}>{` ${producer.name} ${
+																	idx.length === i + 1 ? "" : ","
+																}`}</span>
+															);
+														}
+													)}
+												</p>
+												<p className='text-xs mb-1'>
+													Studios:{" "}
+													{anime.data?.studios?.map(
+														(studio: any, i: number, idx: any) => {
+															return (
+																<span key={i}>{` ${studio.name} ${
+																	idx.length === i + 1 ? "" : ","
+																}`}</span>
+															);
+														}
+													)}
+												</p>
+												<p className='text-xs mb-1'>
+													Source: {anime.data?.source}
+												</p>
+												<p className='text-xs mb-1'>
+													Genres:{" "}
+													{anime.data?.genres?.map(
+														(genre: any, i: number, idx: any) => {
+															return (
+																<span key={i}>{` ${genre.name} ${
+																	idx.length === i + 1 ? "" : ","
+																}`}</span>
+															);
+														}
+													)}
+												</p>
+												<p className='text-xs mb-1'>
+													Theme:{" "}
+													{anime.data?.themes?.map(
+														(theme: any, i: number, idx: any) => {
+															return (
+																<span key={i}>{` ${theme.name} ${
+																	idx.length === i + 1 ? "" : ","
+																}`}</span>
+															);
+														}
+													)}
+												</p>
+												<p className='text-xs mb-1'>
+													Demographic:{" "}
+													{anime.data?.demographics?.map(
+														(demographic: any, i: number, idx: any) => {
+															return (
+																<span key={i}>{` ${demographic.name} ${
+																	idx.length === i + 1 ? "" : ","
+																}`}</span>
+															);
+														}
+													)}
+												</p>
+												<p className='text-xs mb-1'>
+													Duration: {anime.data?.duration}
+												</p>
+												<p className='text-xs mb-1'>
+													Rating: {anime.data?.rating}
+												</p>
+											</div>
+										</div>
+									</div>
+									<div className='p-1 lg:border lg:border-white lg:border-t-0 md:border md:border-white md:border-t-0'>
+										<div
+											className='collapse collapse-arrow'
+											onClick={() => setIsStatistic(!isStatistic)}
+										>
+											<input type='checkbox' checked={isStatistic} />
+											<div className='collapse-title text-xl font-medium'>
+												Statistics
+											</div>
+											<div className='collapse-content'>
+												<p className='text-xs mb-1'>Score: {anime.data?.score === null ? "?" : formatNumber(anime.data?.score)} (score by {anime.data?.scored_by === null ? '?' : formatNumber(anime.data?.scored_by)} users)</p>
+												<p className='text-xs mb-1'>Ranked: {anime.data?.rank === null ? "?" : formatNumber(anime.data?.rank)}</p>
+												<p className='text-xs mb-1'>Popularity: {anime.data?.popularity === null ? "?" : formatNumber(anime.data?.popularity)}</p>
+												<p className='text-xs mb-1'>Members: {anime.data?.members === null ? "?" : formatNumber(anime.data?.members)}</p>
+												<p className='text-xs mb-1'>Favorites: {anime.data?.favorites === null ? "?" : formatNumber(anime.data?.favorites)}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className='p-2 w-full'>
+									<div className='w-full items-center justify-center'>
+										<div className='tabs tabs-bordered overflow-x-auto w-full'>
+											<input
+												type='radio'
+												name='my_tabs_1'
+												className='tab'
+												onChange={() => setActiveTabs('detail')}
+												aria-label='Details'
+												checked={ activeTabs === 'detail' ? true : false }
+											/>
+											<input
+												type='radio'
+												name='my_tabs_1'
+												className='tab'
+												onChange={() => setActiveTabs('char')}
+												aria-label='Character'
+											/>
+											<input
+												type='radio'
+												name='my_tabs_1'
+												className='tab'
+												onChange={() => setActiveTabs('episode')}
+												aria-label='Episodes'
+											/>
+											<input
+												type='radio'
+												name='my_tabs_1'
+												className='tab'
+												onChange={() => setActiveTabs('stats')}
+												aria-label='Stats'
+											/>
+											<input
+												type='radio'
+												name='my_tabs_1'
+												className='tab'
+												onChange={() => setActiveTabs('review')}
+												aria-label='Reviews'
+											/>
+										</div>
+										<div className={`w-full ${activeTabs === 'detail' ? 'visible' : 'hidden'}`}>
+											<Detail anime={anime} />
+										</div>
+										<div className={`w-full ${activeTabs === 'char' ? 'visible' : 'hidden'}`}>
+											<Char />
+										</div>
+										<div className={`w-full ${activeTabs === 'episode' ? 'visible' : 'hidden'}`}>
+											<Char />
+										</div>
+										<div className={`w-full ${activeTabs === 'stats' ? 'visible' : 'hidden'}`}>
+											<Char />
+										</div>
+										<div className={`w-full ${activeTabs === 'review' ? 'visible' : 'hidden'}`}>
+											<Char />
+										</div>
+									</div>
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
+			</Layout>
+		</main>
+	);
+};
+
+export default Page;
