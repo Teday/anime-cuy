@@ -1,7 +1,7 @@
 "use client";
 import { listMenu } from "@/data";
-import Link from 'next/link';
-import { InputSearch } from './inputSearch';
+import Link from "next/link";
+import { InputSearch } from "./inputSearch";
 
 export const Header = () => {
 	return (
@@ -28,27 +28,29 @@ export const Header = () => {
 						tabIndex={0}
 						className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
 					>
-						<div className="overflow-auto max-h-96">
+						<div className='overflow-auto max-h-96'>
 							{listMenu.map((list: any, i: number) => {
 								return (
 									<li key={i}>
-										<a>{ list.title }</a>
-										{ list.sub_menu.map((sub: any, idx: number) => {
-											return(
+										<a>{list.title}</a>
+										{list.sub_menu.map((sub: any, idx: number) => {
+											return (
 												<ul className='p-2' key={idx}>
 													<li>
-														<a>{ sub.title }</a>
+														<Link href={sub.url}>{sub.title}</Link>
 													</li>
 												</ul>
-											)
-										}) }
+											);
+										})}
 									</li>
-								)
+								);
 							})}
 						</div>
 					</ul>
 				</div>
-				<Link href={'/'} className='normal-case text-xl hover:text-yellow-500'>AnimeCuy</Link>
+				<Link href={"/"} className='normal-case text-xl hover:text-yellow-500'>
+					AnimeCuy
+				</Link>
 			</div>
 			<div className='navbar-center hidden md:flex lg:flex hover:text-yellow-500'>
 				{listMenu.map((res: any, i: number) => (
@@ -61,13 +63,12 @@ export const Header = () => {
 							className='dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52'
 						>
 							{res.sub_menu.map((sub: any, idx: number) => {
-								return(
+								return (
 									<li key={idx}>
 										<Link href={sub.url}>{sub.title}</Link>
 									</li>
-								)
-							}
-							)}
+								);
+							})}
 						</ul>
 					</div>
 				))}
