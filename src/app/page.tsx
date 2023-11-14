@@ -1,12 +1,12 @@
 import { Layout, List } from "@/components";
-import { getAnime, getAnimeNested } from '@/libs';
+import { getAnime, getAnime2, getAnimeNested } from '@/libs';
 import { randomAnime } from "@/utils";
 
 const Page = async () => {
 
 	const animeSeasonsNow = await getAnime("seasons/now?limit=15")
 	const animePopuler = await getAnime("top/anime?limit=15")
-	const animeLastUpdate = await getAnime("watch/episodes?limit=15")
+	const animeLastUpdate = await getAnime2("watch/episodes?limit=15")
 	const animeRecommendations = await getAnimeNested("recommendations/anime", "entry")
 	const animeRecom = randomAnime(animeRecommendations.data, 15)
 	
