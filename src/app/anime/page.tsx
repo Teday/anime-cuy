@@ -1,36 +1,23 @@
-"use client";
+import { Layout, List } from "@/components";
+import { getAnime, getAnimeNested } from '@/libs';
 
-import { Layout } from "@/components";
-import { useRouter } from 'next/navigation'
+const AnimePage = async () => {
 
-const Page = () => {
-
-    const router = useRouter()
-
-    const backPage = (e: any) => {
-        e.preventDefault();
-        router.back()
-    }
-
+	const animeSeasonsNow = await getAnime("seasons/now?limit=15")
+	const animePopuler = await getAnime("top/anime?limit=15")
+	const animeLastUpdate = await getAnime("watch/episodes?limit=15")
+	const animeRecommendations = await getAnimeNested("recommendations/anime", "entry")
+	
 	return (
 		<main className='flex min-h-screen flex-col items-center justify-between'>
 			<Layout>
-				<div className='pt-20'>
-					<div className='flex w-screen h-full items-center justify-center'>
-						<p className='text-black text-[200px]'>🙏</p>
-					</div>
-					<div className='flex w-screen h-full items-center justify-center'>
-						<p className='text-black text-4xl'>
-							Halaman Ini Masih Dalam Tahap Pengembangan
-						</p>
-					</div>
-					<div className='flex w-screen h-full items-center justify-center pt-4'>
-						<button className='text-black font-semibold cursor-pointer hover:text-yellow-600 underline text-xl' onClick={backPage}>Kembali</button>
-					</div>
-				</div>
+				<List anime={animeSeasonsNow} title={`${animeSeasonsNow.data[0].season} ${animeSeasonsNow.data[0].year}`} url="/anime/season" episode={false}/>
+				<List anime={animePopuler} title="Top Anime" url="/anime/top" episode={false}/>
+				<List anime={animeLastUpdate} title="Last Update" url="" episode={true}/>
+				<List anime={animeRecommendations} title="Anime Rekomendasi" url="" episode={false}/>
 			</Layout>
 		</main>
 	);
 };
 
-export default Page;
+export default AnimePage;
