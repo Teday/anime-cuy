@@ -8,7 +8,7 @@ export const Header = () => {
 		<div className='navbar bg-base-100 sticky top-0 z-50'>
 			<div className='navbar-start'>
 				<div className='dropdown'>
-					<label tabIndex={0} className='btn btn-ghost m:hidden l:hidden'>
+					<label tabIndex={0} className='btn btn-ghost md:hidden lg:hidden'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='h-5 w-5'
@@ -50,7 +50,7 @@ export const Header = () => {
 				</div>
 				<Link href={'/'} className='normal-case text-xl hover:text-yellow-500'>AnimeCuy</Link>
 			</div>
-			<div className='navbar-center hidden m:flex l:flex hover:text-yellow-500'>
+			<div className='navbar-center hidden md:flex lg:flex hover:text-yellow-500'>
 				{listMenu.map((res: any, i: number) => (
 					<div className='dropdown dropdown-hover cursor-pointer' key={i}>
 						<label tabIndex={0} className='mx-4 cursor-pointer'>

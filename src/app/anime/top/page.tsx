@@ -40,18 +40,18 @@ const Page = () => {
 	return (
 		<main className='flex flex-col items-center justify-between'>
 			<Layout>
-				<div className='w-full snap-x rounded-box l:px-6 m:px-4 py-2 s:px-2'>
-					<div className='card shadow-xl bg-gray-500'>
-						<div className='grid l:grid-cols-3 m:grid-cols-3 s:grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
-							<div className='w-full l:text-left m:text-left s:text-center'>
-								<h5 className='l:pl-6 m:pl-6 font-semibold l:text-xl m:text-base s:text-sm'>
-									Anime Populer
+				<div className='w-full snap-x rounded-box lg:px-6 md:px-4 p-2'>
+					<div className='card shadow-xl bg-gray-700'>
+						<div className='grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
+							<div className='w-full lg:text-left md:text-left text-center'>
+								<h5 className='lg:pl-6 md:pl-6 font-semibold lg:text-xl md:text-base text-sm'>
+									Top Anime
 								</h5>
 							</div>
 							<div className='w-full text-center'>
 								<DropdownType setPage={setPage} setType={setType} type={type}/>
 							</div>
-							<div className='w-full l:text-right m:text-right s:text-center'>
+							<div className='w-full lg:text-right md:text-right text-center'>
 								<h5 className='pr-6 font-semibold l:text-xl m:text-base s:text-sm'>
 									Total: {totalData}
 								</h5>

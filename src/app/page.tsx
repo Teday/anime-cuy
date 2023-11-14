@@ -14,8 +14,8 @@ const Page = async () => {
 		<main className='flex min-h-screen flex-col items-center justify-between'>
 			<Layout>
 				<List anime={animeSeasonsNow} title={`${animeSeasonsNow.data[0].season} ${animeSeasonsNow.data[0].year}`} url="/anime/season" episode={false}/>
-				<List anime={animePopuler} title="Anime Populer" url="/anime/populer" episode={false}/>
-				<List anime={animeLastUpdate} title="Update Terbaru" url="" episode={true}/>
+				<List anime={animePopuler} title="Top Anime" url="/anime/top" episode={false}/>
+				<List anime={animeLastUpdate} title="Last Update" url="" episode={true}/>
 				<List anime={animeRecom} title="Anime Rekomendasi" url="" episode={false}/>
 			</Layout>
 		</main>

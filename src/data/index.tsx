@@ -2,7 +2,7 @@ export const listMenu = [
     {
         title: "Anime",
         sub_menu: [ 
-            { title: "Anime Populer", url: "/anime/populer" },
+            { title: "Top Anime", url: "/anime/top" },
             { title: "Seasonal Anime", url: "/anime/season" },
             { title: "Videos", url: "/anime/video" },
             { title: "Reviews", url: "/anime/review" },
@@ -35,7 +35,7 @@ export const listMenu = [
 
 export const listType = [
     {
-        title: 'Semua Type',
+        title: 'All Type',
         value: ''
     },
     {

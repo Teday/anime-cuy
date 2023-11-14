@@ -11,7 +11,7 @@ interface props {
 export const DropdownType = ({ type, setType, setPage }: props ) => {
 	return (
 		<select
-			className='bg-base-100 max-w-full select-sm text-white mr-4 outline-none border-none l:text-lg s:text-md cursor-pointer hover:text-yellow-500'
+			className='bg-base-100 max-w-full select-sm text-white mr-4 outline-none border-none lg:text-lg sm:text-md cursor-pointer hover:text-yellow-500'
 			defaultValue=''
 			onChange={(e: any) => {
 				setType(e.target.value);
