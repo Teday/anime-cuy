@@ -32,3 +32,30 @@ export const listMenu = [
     //     sub_menu: [{ title: "Anime Search" }, { title: "Top Anime" }],
     // },
 ];
+
+export const listType = [
+    {
+        title: 'Semua Type',
+        value: ''
+    },
+    {
+        title: 'Tv Series',
+        value: 'tv'
+    },
+    {
+        title: 'Movie',
+        value: 'movie'
+    },
+    {
+        title: 'Ova',
+        value: 'ova'
+    },
+    {
+        title: 'Ona',
+        value: 'ona'
+    },
+    {
+        title: 'Spesial',
+        value: 'special'
+    },
+]

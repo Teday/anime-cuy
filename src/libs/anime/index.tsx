@@ -1,29 +1,15 @@
-export const seasonsNow = async ( limit: number ) => {
+export const getAnime = async ( url: string ) => {
 
-	const response = await fetch(`${process.env.base_url}/seasons/now?limit=${limit}`);
+	const response = await fetch(`${process.env.base_url}/${url}`);
 	const anime = await response.json()
     return anime
 
 };
 
-export const mostPopuler = async ( limit: number, page: number ) => {
+export const getAnimeNested = async ( url: string, objectKey: string ) => {
 
-	if(page === 0){
-		const response = await fetch(`${process.env.base_url}/top/anime?limit=${limit}`);
-		const anime = await response.json()
-		return anime
-	}else{
-		const response = await fetch(`${process.env.base_url}/top/anime?page=${page}&limit=${limit}`);
-		const anime = await response.json()
-		return anime
-	}
-
-};
-
-export const searchAnime = async ( search: string, page: number, limit: number ) => {
-
-	const response = await fetch(`${process.env.base_url}/anime?q=${search}&limit=${limit}&page${page}`);
+	const response = await fetch(`${process.env.base_url}/${url}`);
 	const anime = await response.json()
-    return anime
-
+    const dataAnime = anime.data.flatMap((item: any) => item[objectKey])
+	return { data: dataAnime }
 };

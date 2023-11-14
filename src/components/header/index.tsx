@@ -48,9 +48,9 @@ export const Header = () => {
 						</div>
 					</ul>
 				</div>
-				<Link href={'/'} className='normal-case text-xl'>AnimeCuy</Link>
+				<Link href={'/'} className='normal-case text-xl hover:text-yellow-500'>AnimeCuy</Link>
 			</div>
-			<div className='navbar-center hidden m:flex l:flex'>
+			<div className='navbar-center hidden m:flex l:flex hover:text-yellow-500'>
 				{listMenu.map((res: any, i: number) => (
 					<div className='dropdown dropdown-hover cursor-pointer' key={i}>
 						<label tabIndex={0} className='mx-4 cursor-pointer'>
