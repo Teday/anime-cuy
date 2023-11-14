@@ -10,6 +10,11 @@ export const getAnimeNested = async ( url: string, objectKey: string ) => {
 
 	const response = await fetch(`${process.env.base_url}/${url}`);
 	const anime: any = await response.json()
-    const dataAnime = anime.data.flatMap((item: any) => item[objectKey])
-	return { data: dataAnime }
+	let datas: any = []
+    anime.data.map((item: any) => {
+		item.entry.map( (res:any) => {
+			datas.push(res)
+		})
+	})
+	return { data: datas }
 };
