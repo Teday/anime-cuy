@@ -35,6 +35,22 @@ export const Detail = ({ anime }: props) => {
 					)
 				})}
 			</div>
+			<div className="w-full pt-6 border-white border-b-2">
+				<h3>Opening Theme :</h3>
+				{ anime.data?.theme?.openings.map( (opening:any, i: number) => {
+					return (
+						<p className="text-md sm:text-sm" key={i}>{opening}</p>
+					)
+				})}
+			</div>
+			<div className="w-full pt-6 border-white border-b-2">
+				<h3>Ending Theme :</h3>
+				{ anime.data?.theme?.endings.map( (ending:any, i: number) => {
+					return (
+						<p className="text-md sm:text-sm" key={i}>{ending}</p>
+					)
+				})}
+			</div>
 		</div>
 	);
 };

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Layout, Detail, Char } from "@/components";
+import { Layout, Detail, Char, Episode, Stats, Pictures } from "@/components";
 import { getAnime } from "@/libs";
-import { scroolTop, formatNumber } from "@/utils";
+import { formatNumber } from "@/utils";
 import Image from "next/image";
 
 interface props {
@@ -18,6 +18,11 @@ const Page = ({ params }: props) => {
 	const [isStatistic, setIsStatistic] = useState<boolean>(true);
 	const [activeTabs, setActiveTabs] = useState<string>("detail");
 	const [anime, setAnime] = useState<any>([]);
+	const [animeChar, setAnimeChar] = useState<any>([]);
+	const [animeEpisodes, setAnimeEpisodes] = useState<any>([]);
+	const [pageEpisode, setPageEpisode] = useState<number>(1);
+	const [animeStatistics, setAnimeStatistics] = useState<any>([]);
+	const [animePictures, setAnimePictures] = useState<any>([]);
 
 	useEffect(() => {
 		fetchData();
@@ -25,9 +30,16 @@ const Page = ({ params }: props) => {
 	}, []);
 
 	const fetchData = async () => {
-		scroolTop();
 		const animeDetail = await getAnime(`anime/${params.id}/full`);
+		const animeChars = await getAnime(`anime/${params.id}/characters`);
+		const animeEpisode = await getAnime(`anime/${params.id}/episodes?page=${pageEpisode}`);
+		const animeStatistic = await getAnime(`anime/${params.id}/statistics`);
+		const animePicture = await getAnime(`anime/${params.id}/pictures`);
 		setAnime(animeDetail);
+		setAnimeChar(animeChars);
+		setAnimeEpisodes(animeEpisode);
+		setAnimeStatistics(animeStatistic);
+		setAnimePictures(animePicture);
 		setIsLoading(false);
 	};
 
@@ -221,7 +233,7 @@ const Page = ({ params }: props) => {
 											<input
 												type='radio'
 												name='my_tabs_1'
-												className='tab'
+												className='tab text-white'
 												onChange={() => setActiveTabs("detail")}
 												aria-label='Details'
 												checked={activeTabs === "detail" ? true : false}
@@ -229,30 +241,30 @@ const Page = ({ params }: props) => {
 											<input
 												type='radio'
 												name='my_tabs_1'
-												className='tab'
+												className='tab text-white'
 												onChange={() => setActiveTabs("char")}
 												aria-label='Character'
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
-												className='tab'
+												className='tab text-white'
 												onChange={() => setActiveTabs("episode")}
 												aria-label='Episodes'
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
-												className='tab'
+												className='tab text-white'
 												onChange={() => setActiveTabs("stats")}
 												aria-label='Stats'
 											/>
 											<input
 												type='radio'
 												name='my_tabs_1'
-												className='tab'
-												onChange={() => setActiveTabs("review")}
-												aria-label='Reviews'
+												className='tab text-white'
+												onChange={() => setActiveTabs("picture")}
+												aria-label='Pictures'
 											/>
 										</div>
 										<div
@@ -267,28 +279,28 @@ const Page = ({ params }: props) => {
 												activeTabs === "char" ? "visible" : "hidden"
 											}`}
 										>
-											<Char />
+											<Char anime={animeChar} />
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "episode" ? "visible" : "hidden"
 											}`}
 										>
-											<Char />
+											<Episode anime={animeEpisodes} />
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "stats" ? "visible" : "hidden"
 											}`}
 										>
-											<Char />
+											<Stats anime={animeStatistics} />
 										</div>
 										<div
 											className={`w-full ${
-												activeTabs === "review" ? "visible" : "hidden"
+												activeTabs === "picture" ? "visible" : "hidden"
 											}`}
 										>
-											<Char />
+											<Pictures anime={animePictures} />
 										</div>
 									</div>
 								</div>
