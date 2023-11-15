@@ -5,3 +5,4 @@ export * from './list';
 export * from './pagination';
 export * from './dropdown';
 export * from './tabs';
+export * from './select';

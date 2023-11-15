@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Layout, ListPage, Paginations, DropdownType } from "@/components";
 import { getAnime } from "@/libs";
 import { scroolTop } from "@/utils";
+import { listType } from '@/data';
 
 interface props {
 	params: {
@@ -55,11 +56,11 @@ const Page = ({ params }: props) => {
 								</h5>
 							</div>
 							<div className='w-full text-center'>
-								<DropdownType setPage={setPage} setType={setType} type={type} />
+								<DropdownType setPage={setPage} setData={setType} value={type} listData={listType} />
 							</div>
 							<div className='w-full lg:text-right md:text-right text-center'>
 								<h5 className='pr-6 font-semibold lg:text-xl md:text-base text-sm'>
-									Total: {totalData}
+									Total: {totalData} Anime
 								</h5>
 							</div>
 						</div>

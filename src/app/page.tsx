@@ -64,7 +64,7 @@ const Page = () => {
 						/>
 						<List
 							anime={animeRecommendation}
-							title='Anime Rekomendasi'
+							title='Anime Recommendations'
 							url=''
 							episode={false}
 						/>

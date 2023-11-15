@@ -14,37 +14,27 @@ export const Stats = ({ anime }: props) => {
 				<h3 className='border-white border-b-2'>Summary Stats</h3>
 				<p className='text-md sm:text-sm'>
 					Watching:{" "}
-					{anime.data?.watching === null
-						? "?"
-						: formatNumber(anime.data?.watching)}
+					{formatNumber(anime.data?.watching)}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Completed:{" "}
-					{anime.data?.completed === null
-						? "?"
-						: formatNumber(anime.data?.completed)}
+					{formatNumber(anime.data?.completed)}
 				</p>
 				<p className='text-md sm:text-sm'>
 					On-Hold:{" "}
-					{anime.data?.on_hold === null
-						? "?"
-						: formatNumber(anime.data?.on_hold)}
+					{formatNumber(anime.data?.on_hold)}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Dropped:{" "}
-					{anime.data?.dropped === null
-						? "?"
-						: formatNumber(anime.data?.dropped)}
+					{formatNumber(anime.data?.dropped)}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Plan to Watch:{" "}
-					{anime.data?.plan_to_watch === null
-						? "?"
-						: formatNumber(anime.data?.plan_to_watch)}
+					{formatNumber(anime.data?.plan_to_watch)}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Total:{" "}
-					{anime.data?.total === null ? "?" : formatNumber(anime.data?.total)}
+					{formatNumber(anime.data?.total)}
 				</p>
 			</div>
 			<div className='w-full mt-4'>
@@ -59,7 +49,7 @@ export const Stats = ({ anime }: props) => {
                                     value={ data.percentage }
                                     max='100'
                                 ></progress>
-                                <p className="pl-3">{ data.percentage }% ({ data.votes === null ? "?" : formatNumber(data.votes) } votes)</p>
+                                <p className="pl-3">{ data.percentage }% ({ formatNumber(data.votes) } votes)</p>
                             </div>
 						);
 					})}
