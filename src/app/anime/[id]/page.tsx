@@ -49,8 +49,8 @@ const Page = ({ params }: props) => {
 				<div className='w-full snap-x rounded-box sm:px-6 md:px-4 py-2 px-2'>
 					<div className='card shadow-xl bg-gray-700'>
 						<div className='bg-base-100 w-full rounded-t-lg p-2'>
-							<div className='w-full lg:text-left md:text-left text-center'>
-								<h5 className='lg:pl-6 md:pl-6 font-semibold lg:text-xl md:text-base text-sm'>
+							<div className='w-full text-center'>
+								<h5 className='font-semibold lg:text-xl md:text-base text-sm'>
 									{anime.data?.title}
 								</h5>
 							</div>
@@ -190,26 +190,26 @@ const Page = ({ params }: props) => {
 											<div className='collapse-content'>
 												<p className='text-xs mb-1'>
 													Score:{" "}
-													{formatNumber(anime.data?.score)}{" "}
+													{formatNumber(anime.data?.score.toString() || 'null')}{" "}
 													(score by{" "}
-													{formatNumber(anime.data?.scored_by)}{" "}
+													{formatNumber(anime.data?.scored_by.toString() || 'null')}{" "}
 													users)
 												</p>
 												<p className='text-xs mb-1'>
 													Ranked:{" "}
-													{formatNumber(anime.data?.rank)}
+													{formatNumber(anime.data?.rank.toString() || 'null')}
 												</p>
 												<p className='text-xs mb-1'>
 													Popularity:{" "}
-													{formatNumber(anime.data?.popularity)}
+													{formatNumber(anime.data?.popularity.toString() || 'null')}
 												</p>
 												<p className='text-xs mb-1'>
 													Members:{" "}
-													{formatNumber(anime.data?.members)}
+													{formatNumber(anime.data?.members.toString() || 'null')}
 												</p>
 												<p className='text-xs mb-1'>
 													Favorites:{" "}
-													{formatNumber(anime.data?.favorites)}
+													{formatNumber(anime.data?.favorites.toString() || 'null')}
 												</p>
 											</div>
 										</div>

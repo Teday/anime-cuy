@@ -40,48 +40,40 @@ const Page = () => {
 	return (
 		<main className='flex min-h-screen flex-col items-center justify-between'>
 			<Layout>
-				{isLoading ? (
-					<div className='flex w-screen h-screen items-center justify-center'>
-						<div className='custom-loader'></div>
-					</div>
-				) : (
-					<>
-						<List
-							anime={animeSeason}
-							title={
-								animeSeason.data === undefined
-									? "-"
-									: `${animeSeason.data[0].season} ${animeSeason.data[0].year}`
-							}
-							url='/anime/season'
-							episode={false}
-						/>
-						<List
-							anime={animePopuler}
-							title='Top Anime'
-							url='/anime/top'
-							episode={false}
-						/>
-						<List
-							anime={animeRecommendation}
-							title='Anime Recommendations'
-							url=''
-							episode={false}
-						/>
-						<List
-							anime={animeLastUpdate}
-							title='Last Update'
-							url=''
-							episode={true}
-						/>
-						<List
-							anime={animeUpcoming}
-							title='Anime Upcoming'
-							url=''
-							episode={false}
-						/>
-					</>
-				)}
+				<List
+					anime={animeSeason}
+					title={
+						animeSeason.data === undefined
+							? "-"
+							: `${animeSeason.data[0].season} ${animeSeason.data[0].year}`
+					}
+					url='/anime/season'
+					episode={false}
+				/>
+				<List
+					anime={animePopuler}
+					title='Top Anime'
+					url='/anime/top'
+					episode={false}
+				/>
+				<List
+					anime={animeRecommendation}
+					title='Anime Recommendations'
+					url=''
+					episode={false}
+				/>
+				<List
+					anime={animeLastUpdate}
+					title='Last Update'
+					url=''
+					episode={true}
+				/>
+				<List
+					anime={animeUpcoming}
+					title='Anime Upcoming'
+					url=''
+					episode={false}
+				/>
 			</Layout>
 		</main>
 	);

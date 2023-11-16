@@ -1,13 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Layout, ListPage, Paginations, DropdownType } from "@/components";
+import {
+	Layout,
+	ListPage,
+	Paginations,
+	DropdownType,
+	Skeleton,
+} from "@/components";
 import { getAnime } from "@/libs";
 import { scroolTop } from "@/utils";
-import { listType, listRating } from "@/data";
+import { listType, listRating, listSkeletonPage } from "@/data";
 
 const Page = () => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [type, setType] = useState<string>("");
 	const [rating, setRating] = useState<string>("");
 	const [anime, setAnime] = useState<any>([]);
@@ -24,13 +30,13 @@ const Page = () => {
 		setIsLoading(true);
 		scroolTop();
 		let animePopuler: any;
-		if ( type === "" && rating === "" ) {
+		if (type === "" && rating === "") {
 			animePopuler = await getAnime(`top/anime?page=${page}&limit=20`);
-		} else if( type !== "" && rating === "" ){
+		} else if (type !== "" && rating === "") {
 			animePopuler = await getAnime(
 				`top/anime?page=${page}&limit=20&type=${type}`
 			);
-		} else if( type === "" && rating !== "" ){
+		} else if (type === "" && rating !== "") {
 			animePopuler = await getAnime(
 				`top/anime?page=${page}&limit=20&rating=${rating}`
 			);
@@ -52,17 +58,25 @@ const Page = () => {
 					<div className='card shadow-xl bg-gray-700'>
 						<div className='grid grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
 							<div className='w-full text-center'>
-								<h5 className='lg:text-xl md:text-base text-md'>
-									Top Anime
-								</h5>
+								<h5 className='lg:text-xl md:text-base text-md'>Top Anime</h5>
 							</div>
 						</div>
 						<div className='grid grid-cols-3 gap-2 bg-base-100 w-full rounded-t-lg overflow-x-auto p-2'>
 							<div className='w-full text-center'>
-								<DropdownType setPage={setPage} listData={listType} setData={setType} value={type} />
+								<DropdownType
+									setPage={setPage}
+									listData={listType}
+									setData={setType}
+									value={type}
+								/>
 							</div>
 							<div className='w-full text-center'>
-								<DropdownType setPage={setPage} listData={listRating} setData={setRating} value={rating} />
+								<DropdownType
+									setPage={setPage}
+									listData={listRating}
+									setData={setRating}
+									value={rating}
+								/>
 							</div>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-lg md:text-base text-sm p-1.5'>
@@ -70,7 +84,13 @@ const Page = () => {
 								</h5>
 							</div>
 						</div>
-						<ListPage anime={anime} isLoading={isLoading} />
+						{isLoading ? (
+							<div className='grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 p-2'>
+								<Skeleton dataSkeleton={listSkeletonPage} />
+							</div>
+						) : (
+							<ListPage anime={anime} />
+						)}
 					</div>
 				</div>
 				<div className='flex justify-center p-2 overflow-x-auto'>

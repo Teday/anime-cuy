@@ -6,3 +6,4 @@ export * from './pagination';
 export * from './dropdown';
 export * from './tabs';
 export * from './select';
+export * from './skeleton';

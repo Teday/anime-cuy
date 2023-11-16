@@ -6,18 +6,13 @@ import { NoData } from "./noData";
 import Link from "next/link";
 
 interface props {
-	isLoading: boolean;
 	anime: any;
 }
 
-export const ListPage = ({ isLoading, anime }: props) => {
+export const ListPage = ({ anime }: props) => {
 	return (
 		<div className='grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 p-2'>
-			{isLoading ? (
-				<div className='flex w-screen h-screen items-center justify-center'>
-					<div className='custom-loader'></div>
-				</div>
-			) : anime.data?.length <= 0 ? (
+			{ anime.data?.length <= 0 ? (
 				<NoData />
 			) : (
 				anime.data?.map((res: any, i: number) => {
@@ -38,9 +33,7 @@ export const ListPage = ({ isLoading, anime }: props) => {
 							</figure>
 							<div className='card-body p-2 max-h-[200px] min-h-[200px] overflow-x-auto'>
 								<h2 className='card-title text-sm break-words'>{res.title}</h2>
-								<p className='text-[10px] text-gray-300 m-0'>
-									{res.synopsis}
-								</p>
+								<p className='text-[10px] text-gray-300 m-0'>{res.synopsis}</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									{res.season === null ? "" : res.season}{" "}
 									{res.year === null ? "" : res.year}
@@ -69,7 +62,9 @@ export const ListPage = ({ isLoading, anime }: props) => {
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									Demographic:{" "}
-									{res.demographics?.length > 0 ? res.demographics[0].name : "-"}
+									{res.demographics?.length > 0
+										? res.demographics[0].name
+										: "-"}
 								</p>
 							</div>
 							<div className='grid grid-cols-2 gap-2 rounded-b-box bottom-0'>

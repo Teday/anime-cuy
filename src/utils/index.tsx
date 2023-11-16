@@ -11,9 +11,10 @@ export const randomAnime = ( anime: any, gap: number ) => {
 	return { data: anime?.slice(first, last)}
 };
 
-export const formatNumber = (data: number) => {
-    if(data !== null){
-        let number_string = data?.toString().replace(/[^,\d]/g, '');
+export const formatNumber = (data: string) => {
+    
+    if(data !== 'null'){
+        let number_string = data.replace(/[^,\d]/g, '').toString();
         let split = number_string.split(',');
         let sisa = split[0]?.length % 3;
         let number = split[0]?.substr(0, sisa);

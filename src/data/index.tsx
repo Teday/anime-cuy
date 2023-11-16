@@ -89,3 +89,86 @@ export const listRating = [
         value: 'rx'
     },
 ]
+
+export const listSkeletonPage = [
+    {
+        no: 1,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 2,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 3,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 4,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 5,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 6,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 7,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 8,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 9,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 10,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 11,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 12,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 13,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 14,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 15,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 16,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 17,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 18,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 19,
+        className: 'skeleton w-full h-[350px] mr-2'
+    },
+    {
+        no: 20,
+        className: 'skeleton w-full h-[350px] mr-2'
+    }
+]

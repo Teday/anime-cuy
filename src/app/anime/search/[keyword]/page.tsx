@@ -1,10 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Layout, ListPage, Paginations, DropdownType } from "@/components";
+import {
+	Layout,
+	ListPage,
+	Paginations,
+	DropdownType,
+	Skeleton,
+} from "@/components";
 import { getAnime } from "@/libs";
 import { scroolTop } from "@/utils";
-import { listType } from '@/data';
+import { listType, listSkeletonPage } from "@/data";
 
 interface props {
 	params: {
@@ -13,7 +19,7 @@ interface props {
 }
 
 const Page = ({ params }: props) => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [type, setType] = useState<string>("");
 	const [anime, setAnime] = useState<any>([]);
 	const [page, setPage] = useState<number>(1);
@@ -27,8 +33,8 @@ const Page = ({ params }: props) => {
 
 	const fetchData = async () => {
 		setIsLoading(true);
-		scroolTop()
-		let animeSearch: any
+		scroolTop();
+		let animeSearch: any;
 		if (type === "") {
 			animeSearch = await getAnime(
 				`anime?q=${params.keyword}&limit=${15}&page=${page}`
@@ -49,22 +55,33 @@ const Page = ({ params }: props) => {
 			<Layout>
 				<div className='w-full snap-x rounded-box lg:px-6 md:px-4 p-2'>
 					<div className='card shadow-xl bg-gray-700'>
-						<div className='grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
-							<div className='w-full lg:text-left md:text-left text-center'>
+						<div className='grid grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
+							<div className='w-full text-center'>
 								<h5 className='lg:pl-6 md:pl-6 font-semibold lg:text-xl md:text-base text-sm'>
-								Search {decodeURI(params.keyword)}
+									Search {decodeURI(params.keyword)}
 								</h5>
 							</div>
+						</div>
+						<div className='w-full grid grid-cols-2 bg-base-100 overflow-x-auto'>
+							<DropdownType
+								setPage={setPage}
+								setData={setType}
+								value={type}
+								listData={listType}
+							/>
 							<div className='w-full text-center'>
-								<DropdownType setPage={setPage} setData={setType} value={type} listData={listType} />
-							</div>
-							<div className='w-full lg:text-right md:text-right text-center'>
-								<h5 className='pr-6 font-semibold lg:text-xl md:text-base text-sm'>
+								<h5 className='font-semibold lg:text-xl md:text-base text-sm mt-2'>
 									Total: {totalData} Anime
 								</h5>
 							</div>
 						</div>
-						<ListPage anime={anime} isLoading={isLoading} />
+						{isLoading ? (
+							<div className='grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 p-2'>
+								<Skeleton dataSkeleton={listSkeletonPage} />
+							</div>
+						) : (
+							<ListPage anime={anime} />
+						)}
 					</div>
 				</div>
 				<div className='flex justify-center p-2'>

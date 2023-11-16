@@ -14,27 +14,27 @@ export const Stats = ({ anime }: props) => {
 				<h3 className='border-white border-b-2'>Summary Stats</h3>
 				<p className='text-md sm:text-sm'>
 					Watching:{" "}
-					{formatNumber(anime.data?.watching)}
+					{formatNumber(anime.data?.watching.toString()  || 'null' )}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Completed:{" "}
-					{formatNumber(anime.data?.completed)}
+					{formatNumber(anime.data?.completed.toString() || 'null')}
 				</p>
 				<p className='text-md sm:text-sm'>
 					On-Hold:{" "}
-					{formatNumber(anime.data?.on_hold)}
+					{formatNumber(anime.data?.on_hold.toString() || 'null')}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Dropped:{" "}
-					{formatNumber(anime.data?.dropped)}
+					{formatNumber(anime.data?.dropped.toString() || 'null')}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Plan to Watch:{" "}
-					{formatNumber(anime.data?.plan_to_watch)}
+					{formatNumber(anime.data?.plan_to_watch.toString() || 'null')}
 				</p>
 				<p className='text-md sm:text-sm'>
 					Total:{" "}
-					{formatNumber(anime.data?.total)}
+					{formatNumber(anime.data?.total.toString() || 'null')}
 				</p>
 			</div>
 			<div className='w-full mt-4'>
@@ -49,7 +49,7 @@ export const Stats = ({ anime }: props) => {
                                     value={ data.percentage }
                                     max='100'
                                 ></progress>
-                                <p className="pl-3">{ data.percentage }% ({ formatNumber(data.votes) } votes)</p>
+                                <p className="pl-3">{ data.percentage }% ({ formatNumber(data.votes.toString()) } votes)</p>
                             </div>
 						);
 					})}

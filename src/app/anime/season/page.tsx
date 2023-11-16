@@ -6,14 +6,14 @@ import {
 	ListPage,
 	Paginations,
 	DropdownType,
-	SelectComponent,
+	Skeleton,
 } from "@/components";
 import { getAnime } from "@/libs";
 import { scroolTop } from "@/utils";
-import { listType } from '@/data';
+import { listType, listSkeletonPage } from "@/data";
 
 const Page = () => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [type, setType] = useState<string>("");
 	const [season, setSeason] = useState<string>("");
 	const [year, setYear] = useState<string>("");
@@ -46,18 +46,18 @@ const Page = () => {
 				});
 			});
 			setListSeason(list);
+			setSeason(`${animeSeasons.data[0].season} ${animeSeasons.data[0].year}`);
 		} else {
 			animeSeasons = await getAnime(
 				`seasons/now?page=${page}&limit=20&filter=${type}`
 			);
 		}
-		setSeason(`${animeSeasons.data[0].season} ${animeSeasons.data[0].year}`);
 		setTotalPage(animeSeasons.pagination.last_visible_page);
 		setAnime(animeSeasons);
 		setTotalData(animeSeasons.pagination.items.total);
 		setIsLoading(false);
 	};
-	console.log(listSeason);
+
 	return (
 		<main className='flex flex-col items-center justify-between'>
 			<Layout>
@@ -71,14 +71,25 @@ const Page = () => {
 							</div>
 						</div>
 						<div className='w-full grid grid-cols-2 bg-base-100 overflow-x-auto'>
-							<DropdownType setPage={setPage} setData={setType} value={type} listData={listType} />
+							<DropdownType
+								setPage={setPage}
+								setData={setType}
+								value={type}
+								listData={listType}
+							/>
 							<div className='w-full text-center'>
-								<h5 className='font-semibold lg:text-xl md:text-base text-sm'>
+								<h5 className='font-semibold lg:text-xl md:text-base text-sm mt-2'>
 									Total: {totalData} Anime
 								</h5>
 							</div>
 						</div>
-						<ListPage anime={anime} isLoading={isLoading} />
+						{isLoading ? (
+							<div className='grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 p-2'>
+								<Skeleton dataSkeleton={listSkeletonPage} />
+							</div>
+						) : (
+							<ListPage anime={anime} />
+						)}
 					</div>
 				</div>
 				<div className='flex justify-center p-2 overflow-x-auto'>
