@@ -71,7 +71,7 @@ export const ListPage = ({ anime }: props) => {
 								<div className='w-full p-2'>
 									<p className='text-xs flex justify-center'>
 										<Star size={14} className='text-yellow-500 mr-1' />
-										{res.score}
+										{res.score === null ? "?" : res.score}
 									</p>
 								</div>
 								<div className='w-full p-2 text-center'>

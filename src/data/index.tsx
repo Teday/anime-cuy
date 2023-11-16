@@ -90,6 +90,48 @@ export const listRating = [
     },
 ]
 
+export const listStatus = [
+    {
+        title: 'All Status',
+        value: ''
+    },
+    {
+        title: 'Airing',
+        value: 'airing'
+    },
+    {
+        title: 'Complete',
+        value: 'complete'
+    },
+    {
+        title: 'Upcoming',
+        value: 'upcoming'
+    }
+]
+
+export const listFilter = [
+    {
+        title: 'All Filter',
+        value: ''
+    },
+    {
+        title: 'Airing',
+        value: 'airing'
+    },
+    {
+        title: 'Upcoming',
+        value: 'upcoming'
+    },
+    {
+        title: 'By Popularity',
+        value: 'bypopularity'
+    },
+    {
+        title: 'Favorite',
+        value: 'favorite'
+    }
+]
+
 export const listSkeletonPage = [
     {
         no: 1,

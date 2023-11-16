@@ -10,12 +10,13 @@ import {
 } from "@/components";
 import { getAnime } from "@/libs";
 import { scroolTop } from "@/utils";
-import { listType, listRating, listSkeletonPage } from "@/data";
+import { listType, listRating, listFilter, listSkeletonPage } from "@/data";
 
 const Page = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [type, setType] = useState<string>("");
 	const [rating, setRating] = useState<string>("");
+	const [filter, setFilter] = useState<string>("");
 	const [anime, setAnime] = useState<any>([]);
 	const [page, setPage] = useState<number>(1);
 	const [totalPage, setTotalPage] = useState<number>(1);
@@ -24,27 +25,18 @@ const Page = () => {
 	useEffect(() => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, type, rating]);
+	}, [page, type, rating, filter]);
 
 	const fetchData = async () => {
 		setIsLoading(true);
 		scroolTop();
-		let animePopuler: any;
-		if (type === "" && rating === "") {
-			animePopuler = await getAnime(`top/anime?page=${page}&limit=20`);
-		} else if (type !== "" && rating === "") {
-			animePopuler = await getAnime(
-				`top/anime?page=${page}&limit=20&type=${type}`
-			);
-		} else if (type === "" && rating !== "") {
-			animePopuler = await getAnime(
-				`top/anime?page=${page}&limit=20&rating=${rating}`
-			);
-		} else {
-			animePopuler = await getAnime(
-				`top/anime?page=${page}&limit=20&type=${type}&rating=${rating}`
-			);
-		}
+		const animePopuler = await getAnime(
+			`top/anime?page=${page}&limit=20&limit=${15}&page=${page}${
+				type !== "" ? `&type=${type}` : ""
+			}${rating !== "" ? `&rating=${rating}` : ""}${
+				filter !== "" ? `&filter=${filter}` : ""
+			}`
+		);
 		setTotalPage(animePopuler.pagination.last_visible_page);
 		setAnime(animePopuler);
 		setTotalData(animePopuler.pagination.items.total);
@@ -61,23 +53,25 @@ const Page = () => {
 								<h5 className='lg:text-xl md:text-base text-md'>Top Anime</h5>
 							</div>
 						</div>
-						<div className='grid grid-cols-3 gap-2 bg-base-100 w-full rounded-t-lg overflow-x-auto p-2'>
-							<div className='w-full text-center'>
-								<DropdownType
-									setPage={setPage}
-									listData={listType}
-									setData={setType}
-									value={type}
-								/>
-							</div>
-							<div className='w-full text-center'>
-								<DropdownType
-									setPage={setPage}
-									listData={listRating}
-									setData={setRating}
-									value={rating}
-								/>
-							</div>
+						<div className='grid grid-cols-4 gap-2 bg-base-100 w-full rounded-t-lg overflow-x-auto p-2'>
+							<DropdownType
+								setPage={setPage}
+								listData={listType}
+								setData={setType}
+								value={type}
+							/>
+							<DropdownType
+								setPage={setPage}
+								listData={listRating}
+								setData={setRating}
+								value={rating}
+							/>
+							<DropdownType
+								setPage={setPage}
+								listData={listFilter}
+								setData={setFilter}
+								value={filter}
+							/>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-lg md:text-base text-sm p-1.5'>
 									Total: {totalData} Anime

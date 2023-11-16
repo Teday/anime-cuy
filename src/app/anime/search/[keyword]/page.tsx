@@ -10,7 +10,7 @@ import {
 } from "@/components";
 import { getAnime } from "@/libs";
 import { scroolTop } from "@/utils";
-import { listType, listSkeletonPage } from "@/data";
+import { listType, listRating, listStatus, listSkeletonPage } from "@/data";
 
 interface props {
 	params: {
@@ -21,6 +21,8 @@ interface props {
 const Page = ({ params }: props) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [type, setType] = useState<string>("");
+	const [rating, setRating] = useState<string>("");
+	const [status, setStatus] = useState<string>("");
 	const [anime, setAnime] = useState<any>([]);
 	const [page, setPage] = useState<number>(1);
 	const [totalPage, setTotalPage] = useState<number>(1);
@@ -29,21 +31,16 @@ const Page = ({ params }: props) => {
 	useEffect(() => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, type]);
+	}, [page, type, rating, status]);
 
 	const fetchData = async () => {
 		setIsLoading(true);
 		scroolTop();
-		let animeSearch: any;
-		if (type === "") {
-			animeSearch = await getAnime(
-				`anime?q=${params.keyword}&limit=${15}&page=${page}`
-			);
-		} else {
-			animeSearch = await getAnime(
-				`anime?q=${params.keyword}&limit=${15}&page=${page}&type=${type}`
-			);
-		}
+		const animeSearch = await getAnime(
+			`anime?q=${params.keyword}&limit=${15}&page=${page}${
+				type !== "" ? `&type=${type}` : ""
+			}${rating !== "" ? `&rating=${rating}` : ""}${status !== "" ? `&status=${status}` : ""}`
+		);
 		setTotalPage(animeSearch.pagination.last_visible_page);
 		setAnime(animeSearch);
 		setTotalData(animeSearch.pagination.items.total);
@@ -62,12 +59,24 @@ const Page = ({ params }: props) => {
 								</h5>
 							</div>
 						</div>
-						<div className='w-full grid grid-cols-2 bg-base-100 overflow-x-auto'>
+						<div className='w-full grid grid-cols-4 bg-base-100 overflow-x-auto'>
 							<DropdownType
 								setPage={setPage}
 								setData={setType}
 								value={type}
 								listData={listType}
+							/>
+							<DropdownType
+								setPage={setPage}
+								setData={setRating}
+								value={rating}
+								listData={listRating}
+							/>
+							<DropdownType
+								setPage={setPage}
+								setData={setStatus}
+								value={status}
+								listData={listStatus}
 							/>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-xl md:text-base text-sm mt-2'>
