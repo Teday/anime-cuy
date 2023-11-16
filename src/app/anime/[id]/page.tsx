@@ -190,26 +190,26 @@ const Page = ({ params }: props) => {
 											<div className='collapse-content'>
 												<p className='text-xs mb-1'>
 													Score:{" "}
-													{formatNumber(anime.data?.score.toString() || 'null')}{" "}
+													{formatNumber(anime.data?.score)}{" "}
 													(score by{" "}
-													{formatNumber(anime.data?.scored_by.toString() || 'null')}{" "}
+													{formatNumber(anime.data?.scored_by)}{" "}
 													users)
 												</p>
 												<p className='text-xs mb-1'>
 													Ranked:{" "}
-													{formatNumber(anime.data?.rank.toString() || 'null')}
+													{formatNumber(anime.data?.rank)}
 												</p>
 												<p className='text-xs mb-1'>
 													Popularity:{" "}
-													{formatNumber(anime.data?.popularity.toString() || 'null')}
+													{formatNumber(anime.data?.popularity)}
 												</p>
 												<p className='text-xs mb-1'>
 													Members:{" "}
-													{formatNumber(anime.data?.members.toString() || 'null')}
+													{formatNumber(anime.data?.members)}
 												</p>
 												<p className='text-xs mb-1'>
 													Favorites:{" "}
-													{formatNumber(anime.data?.favorites.toString() || 'null')}
+													{formatNumber(anime.data?.favorites)}
 												</p>
 											</div>
 										</div>
