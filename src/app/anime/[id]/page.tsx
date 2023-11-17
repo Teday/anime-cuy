@@ -31,15 +31,19 @@ const Page = ({ params }: props) => {
 
 	const fetchData = async () => {
 		const animeDetail = await getAnime(`anime/${params.id}/full`);
-		const animeChars = await getAnime(`anime/${params.id}/characters`);
 		const animeEpisode = await getAnime(`anime/${params.id}/episodes?page=${pageEpisode}`);
 		const animeStatistic = await getAnime(`anime/${params.id}/statistics`);
-		const animePicture = await getAnime(`anime/${params.id}/pictures`);
-		setAnime(animeDetail);
-		setAnimeChar(animeChars);
-		setAnimeEpisodes(animeEpisode);
+		
+		//biar gk kena limit dari api jikan
+		setTimeout(async () => {
+			const animeChars = await getAnime(`anime/${params.id}/characters`);
+			const animePicture = await getAnime(`anime/${params.id}/pictures`);
+			setAnimePictures(animePicture);
+			setAnimeChar(animeChars);
+		}, 1000);
 		setAnimeStatistics(animeStatistic);
-		setAnimePictures(animePicture);
+		setAnime(animeDetail);
+		setAnimeEpisodes(animeEpisode);
 		setIsLoading(false);
 	};
 

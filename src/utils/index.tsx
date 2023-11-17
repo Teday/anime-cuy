@@ -13,7 +13,7 @@ export const randomAnime = ( anime: any, gap: number ) => {
 
 export const formatNumber = (data: string) => {
     
-    if(data !== null){
+    if(data !== null && data !== undefined){
         let number_string = data.toString().replace(/[^,\d]/g, '');
         let split = number_string.split(',');
         let sisa = split[0]?.length % 3;

@@ -1,7 +1,5 @@
 "use client";
 
-import { Star } from "@phosphor-icons/react";
-
 export const NoData = () => {
 	return (
 		<div className='w-screen h-screen text-center justify-center p-10'>
