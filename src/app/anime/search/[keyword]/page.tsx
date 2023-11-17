@@ -23,6 +23,7 @@ const Page = ({ params }: props) => {
 	const [type, setType] = useState<string>("");
 	const [rating, setRating] = useState<string>("");
 	const [status, setStatus] = useState<string>("");
+	const [genre, setGenre] = useState<string>("");
 	const [anime, setAnime] = useState<any>([]);
 	const [page, setPage] = useState<number>(1);
 	const [totalPage, setTotalPage] = useState<number>(1);
@@ -39,7 +40,9 @@ const Page = ({ params }: props) => {
 		const animeSearch = await getAnime(
 			`anime?q=${params.keyword}&limit=${15}&page=${page}${
 				type !== "" ? `&type=${type}` : ""
-			}${rating !== "" ? `&rating=${rating}` : ""}${status !== "" ? `&status=${status}` : ""}`
+			}${rating !== "" ? `&rating=${rating}` : ""}${
+				status !== "" ? `&status=${status}` : ""
+			}`
 		);
 		setTotalPage(animeSearch.pagination.last_visible_page);
 		setAnime(animeSearch);
@@ -59,27 +62,33 @@ const Page = ({ params }: props) => {
 								</h5>
 							</div>
 						</div>
-						<div className='w-full grid grid-cols-4 bg-base-100 overflow-x-auto'>
-							<DropdownType
-								setPage={setPage}
-								setData={setType}
-								value={type}
-								listData={listType}
-							/>
-							<DropdownType
-								setPage={setPage}
-								setData={setRating}
-								value={rating}
-								listData={listRating}
-							/>
-							<DropdownType
-								setPage={setPage}
-								setData={setStatus}
-								value={status}
-								listData={listStatus}
-							/>
+						<div className='grid lg:grid-cols-4 grid-cols-2 sm:grid-cols-2 gap-2 bg-base-100'>
+							<div className="w-full text-center">
+								<DropdownType
+									setPage={setPage}
+									setData={setType}
+									value={type}
+									listData={listType}
+								/>
+							</div>
+							<div className="w-full text-center">
+								<DropdownType
+									setPage={setPage}
+									setData={setStatus}
+									value={status}
+									listData={listStatus}
+								/>
+							</div>
+							<div className="w-full text-center">
+								<DropdownType
+									setPage={setPage}
+									setData={setRating}
+									value={rating}
+									listData={listRating}
+								/>
+							</div>
 							<div className='w-full text-center'>
-								<h5 className='font-semibold lg:text-xl md:text-base text-sm mt-2'>
+								<h5 className='font-semibold lg:text-xl md:text-base text-sm'>
 									Total: {totalData} Anime
 								</h5>
 							</div>

@@ -38,7 +38,7 @@ export const List = ({ anime, title, url, episode }: props) => {
 						</div>
 					)}
 				</div>
-				<div className='w-full bg-gray-500 rounded-b-lg'>
+				<div className='w-full bg-gray-700 rounded-b-lg'>
 					<div className='flex p-2 overflow-x-auto'>
 						{anime.data === undefined ? (
 							<>

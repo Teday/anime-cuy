@@ -9,7 +9,7 @@ interface props {
 export const DropdownType = ({ value, listData, setData, setPage }: props ) => {
 	return (
 		<select
-			className='bg-base-100 m-1.5 max-w-full select-xs w-full text-white mr-4 outline-none border-none lg:text-lg sm:text-md cursor-pointer hover:text-yellow-500'
+			className='bg-base-100 select-sm w-full text-white outline-none border-none lg:text-lg sm:text-md cursor-pointer hover:text-yellow-500'
 			defaultValue={value}
 			onChange={(e: any) => {
 				setData(e.target.value);

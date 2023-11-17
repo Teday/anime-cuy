@@ -53,25 +53,31 @@ const Page = () => {
 								<h5 className='lg:text-xl md:text-base text-md'>Top Anime</h5>
 							</div>
 						</div>
-						<div className='grid grid-cols-4 gap-2 bg-base-100 w-full rounded-t-lg overflow-x-auto p-2'>
-							<DropdownType
-								setPage={setPage}
-								listData={listType}
-								setData={setType}
-								value={type}
-							/>
-							<DropdownType
-								setPage={setPage}
-								listData={listRating}
-								setData={setRating}
-								value={rating}
-							/>
-							<DropdownType
-								setPage={setPage}
-								listData={listFilter}
-								setData={setFilter}
-								value={filter}
-							/>
+						<div className='grid lg:grid-cols-4 grid-cols-2 sm:grid-cols-2 gap-2 bg-base-100'>
+							<div className='w-full text-center'>
+								<DropdownType
+									setPage={setPage}
+									listData={listType}
+									setData={setType}
+									value={type}
+								/>
+							</div>
+							<div className='w-full text-center'>
+								<DropdownType
+									setPage={setPage}
+									listData={listFilter}
+									setData={setFilter}
+									value={filter}
+								/>
+							</div>
+							<div className='w-full text-center'>
+								<DropdownType
+									setPage={setPage}
+									listData={listRating}
+									setData={setRating}
+									value={rating}
+								/>
+							</div>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-lg md:text-base text-sm p-1.5'>
 									Total: {totalData} Anime
