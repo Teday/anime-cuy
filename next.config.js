@@ -1,12 +1,16 @@
+const withPWA = require('next-pwa')({
+	dest: "public",
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: false,
+	reactStrictMode: false,
 	env: {
-		base_url: 'https://api.jikan.moe/v4',
+		base_url: "https://api.jikan.moe/v4",
 	},
 	images: {
-		domains: ['cdn.myanimelist.net'],
-	}
-}
+		domains: ["cdn.myanimelist.net"],
+	},
+};
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig);
