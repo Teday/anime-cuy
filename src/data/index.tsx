@@ -8,16 +8,12 @@ export const listMenu = [
             // { title: "Reviews", url: "/anime/review" }
         ],
     },
-    // {
-    //     title: "Manga",
-    //     sub_menu: [
-    //         { title: "Manga Search", url: "/manga/search" }, 
-    //         { title: "Top Manga", url: "/manga/top" },
-    //         { title: "Manga Store", url: "/anime/season" },
-    //         { title: "Reviews" },
-    //         { title: "Recommendations" },
-    //     ],
-    // },
+    {
+        title: "Manga",
+        sub_menu: [
+            { title: "Top Manga", url: "/manga/top" }
+        ],
+    },
     // {
     //     title: "Community",
     //     sub_menu: [{ title: "Anime Search" }, { title: "Top Anime" }],
@@ -132,6 +128,64 @@ export const listFilter = [
     }
 ]
 
+export const listTypeManga = [
+    {
+        title: 'All Type',
+        value: ''
+    },
+    {
+        title: 'Manga',
+        value: 'manga'
+    },
+    {
+        title: 'Novel',
+        value: 'novel'
+    },
+    {
+        title: 'Light Novel',
+        value: 'lightnovel'
+    },
+    {
+        title: 'One Shot',
+        value: 'oneshot'
+    },
+    {
+        title: 'Doujin',
+        value: 'doujin'
+    },
+    {
+        title: 'Manhwa',
+        value: 'manhwa'
+    },
+    {
+        title: 'Manhua',
+        value: 'manhua'
+    }
+]
+
+export const listFilterManga = [
+    {
+        title: 'All Filter',
+        value: ''
+    },
+    {
+        title: 'Publishing',
+        value: 'publishing'
+    },
+    {
+        title: 'Upcoming',
+        value: 'upcoming'
+    },
+    {
+        title: 'By Popularity',
+        value: 'bypopularity'
+    },
+    {
+        title: 'Favorite',
+        value: 'favorite'
+    }
+]
+
 export const listSkeletonPage = [
     {
         no: 1,
@@ -212,5 +266,116 @@ export const listSkeletonPage = [
     {
         no: 20,
         className: 'skeleton w-full h-[350px] mr-2'
+    }
+]
+
+export const listSkeletonChar = [
+    {
+        no: 1
+    },
+    {
+        no: 2
+    },
+    {
+        no: 3
+    },
+    {
+        no: 4
+    }
+]
+
+export const listSkeletonEpisode = [
+    {
+        no: 1
+    },
+    {
+        no: 2
+    },
+    {
+        no: 3
+    },
+    {
+        no: 4
+    }
+]
+
+export const listSkeletonStats = [
+    {
+        no: 1
+    },
+    {
+        no: 2
+    },
+    {
+        no: 3
+    },
+    {
+        no: 4
+    },
+    {
+        no: 5
+    }
+]
+
+export const listSkeletonPicture = [
+    {
+        no: 1
+    },
+    {
+        no: 2
+    },
+    {
+        no: 3
+    },
+    {
+        no: 4
+    }
+]
+
+export const listSkeletonInformation = [
+    {
+        no: 1
+    },
+    {
+        no: 2
+    },
+    {
+        no: 3
+    },
+    {
+        no: 4
+    },
+    {
+        no: 5
+    },
+    {
+        no: 6
+    },
+    {
+        no: 7
+    },
+    {
+        no: 8
+    },
+    {
+        no: 9
+    },
+    {
+        no: 10
+    },
+    {
+        no: 11
+    },
+    {
+        no: 12
+    },
+    {
+        no: 13
+    },
+    {
+        no: 14
+    },
+    {
+        no: 15
     }
 ]

@@ -71,7 +71,7 @@ export const Paginations = ({
 						{currentPage - 1}
 					</button>
 				) : null}
-				<button className={`join-item py-2 px-3 bg-gray-700 text-yellow-500`}>
+				<button className={`join-item py-2 px-3 bg-gray-700 text-yellow-500 cursor-not-allowed`}>
 					{currentPage}
 				</button>
 				{currentPage + 1 <= totalPage ? (

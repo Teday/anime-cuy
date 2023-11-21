@@ -29,6 +29,12 @@ export const Header = () => {
 						className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
 					>
 						<div className='overflow-auto max-h-96'>
+							<Link
+								href={"/"}
+								className='text-md hover:text-yellow-500'
+							>
+								Home
+							</Link>
 							{listMenu.map((list: any, i: number) => {
 								return (
 									<li key={i}>
@@ -48,14 +54,17 @@ export const Header = () => {
 						</div>
 					</ul>
 				</div>
-				<Link href={"/"} className='normal-case text-xl hover:text-yellow-500'>
-					AnimeCuy
-				</Link>
 			</div>
-			<div className='navbar-center hidden md:flex lg:flex hover:text-yellow-500'>
+			<div className='navbar-center hidden md:flex lg:flex'>
+				<Link href={"/"} className='normal-case text-md hover:text-yellow-500'>
+					Home
+				</Link>
 				{listMenu.map((res: any, i: number) => (
 					<div className='dropdown dropdown-hover cursor-pointer' key={i}>
-						<label tabIndex={0} className='mx-4 cursor-pointer'>
+						<label
+							tabIndex={0}
+							className='mx-4 cursor-pointer hover:text-yellow-500'
+						>
 							{res.title}
 						</label>
 						<ul
