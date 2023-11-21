@@ -1,5 +1,10 @@
 export const listMenu = [
     {
+        title: "Home",
+        url: "/",
+        sub_menu: []
+    },
+    {
         title: "Anime",
         sub_menu: [ 
             { title: "Top Anime", url: "/anime/top" },
@@ -183,6 +188,33 @@ export const listFilterManga = [
     {
         title: 'Favorite',
         value: 'favorite'
+    }
+]
+
+export const listStatusManga = [
+    {
+        title: 'All Status',
+        value: ''
+    },
+    {
+        title: 'Publishing',
+        value: 'publishing'
+    },
+    {
+        title: 'Complete',
+        value: 'complete'
+    },
+    {
+        title: 'Upcoming',
+        value: 'upcoming'
+    },
+    {
+        title: 'Discontinued',
+        value: 'discontinued'
+    },
+    {
+        title: 'Hiatus',
+        value: 'hiatus'
     }
 ]
 

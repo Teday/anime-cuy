@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Layout, Detail, Char, Episode, Stats, Pictures } from "@/components";
-import { getAnime } from "@/libs";
+import { getData } from "@/libs";
 import { formatNumber } from "@/utils";
 import Image from "next/image";
 import { listSkeletonInformation, listSkeletonStats } from "@/data";
@@ -31,7 +31,7 @@ const Page = ({ params }: props) => {
 	}, []);
 
 	const fetchData = async () => {
-		const animeDetail = await getAnime(`anime/${params.id}/full`);
+		const animeDetail = await getData(`anime/${params.id}/full`);
 		setAnime(animeDetail);
 		setIsLoading(false);
 	};
@@ -40,7 +40,7 @@ const Page = ({ params }: props) => {
 		if (!animeChar.data) {
 			//biar keliatan loading 😂
 			setTimeout(async () => {
-				const animeChars = await getAnime(`anime/${params.id}/characters`);
+				const animeChars = await getData(`anime/${params.id}/characters`);
 				setAnimeChar(animeChars);
 			}, 1000);
 		}
@@ -50,7 +50,7 @@ const Page = ({ params }: props) => {
 		if (!animeEpisodes.data) {
 			//biar keliatan loading 😂
 			setTimeout(async () => {
-				const animeEpisode = await getAnime(
+				const animeEpisode = await getData(
 					`anime/${params.id}/episodes?page=${pageEpisode}`
 				);
 				setAnimeEpisodes(animeEpisode);
@@ -62,7 +62,7 @@ const Page = ({ params }: props) => {
 		if (!animeStatistics.data) {
 			//biar keliatan loading 😂
 			setTimeout(async () => {
-				const animeStatistic = await getAnime(`anime/${params.id}/statistics`);
+				const animeStatistic = await getData(`anime/${params.id}/statistics`);
 				setAnimeStatistics(animeStatistic);
 			}, 1000);
 		}
@@ -71,7 +71,7 @@ const Page = ({ params }: props) => {
 	const fetchDataPictures = async () => {
 		//biar keliatan loading 😂
 		setTimeout( async () => {
-			const animePicture = await getAnime(`anime/${params.id}/pictures`);
+			const animePicture = await getData(`anime/${params.id}/pictures`);
 			setAnimePictures(animePicture);
 		}, 1000)
 	};

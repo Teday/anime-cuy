@@ -6,19 +6,20 @@ import { NoData } from "./noData";
 import Link from "next/link";
 
 interface props {
-	anime: any;
+	data: any;
+	page: string;
 }
 
-export const ListPage = ({ anime }: props) => {
+export const ListPage = ({ data, page }: props) => {
 	return (
 		<div className='grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 p-2'>
-			{ anime.data?.length <= 0 ? (
+			{data.data?.length <= 0 ? (
 				<NoData />
 			) : (
-				anime.data?.map((res: any, i: number) => {
+				data.data?.map((res: any, i: number) => {
 					return (
 						<Link
-							href={`/anime/${res.mal_id}`}
+							href={`/${page}/${res.mal_id}`}
 							className='card w-full h-[400px] bg-base-100 shadow-xl'
 							key={i}
 						>
@@ -39,9 +40,23 @@ export const ListPage = ({ anime }: props) => {
 									{res.year === null ? "" : res.year}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Episode: {res.episodes === null ? "?" : res.episodes} Eps,{" "}
-									{res.duration}
+									{page === "anime"
+										? `Episode: ${
+												res.episodes === null ? "?" : res.episodes
+										} Eps,
+										${res.duration}`
+										: `Chapter: ${res.chapters === null ? "?" : res.chapters}`}
 								</p>
+								{page === "manga" ? (
+									<>
+										<p className='text-[10px] text-gray-300 m-0'>
+											Volume: {res.volumes === null ? "?" : res.volumes}
+										</p>
+										<p className='text-[10px] text-gray-300 m-0'>
+											Status: {res.status === null ? "?" : res.status}
+										</p>
+									</>
+								) : null}
 								<p className='text-[10px] text-gray-300 m-0'>
 									Genre:{" "}
 									{res.genres.map((genre: any, i: number) => {
@@ -52,18 +67,40 @@ export const ListPage = ({ anime }: props) => {
 									Type: {res.type}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Studio: {res.studios?.length > 0 ? res.studios[0].name : "-"}
+									{page === "anime"
+										? `Studio: ${
+												res.studios?.length > 0
+													? res.studios?.map((studio: any) => {
+															return studio.name;
+													})
+													: "-"
+										}`
+										: `Author: ${
+												res.authors?.length > 0
+													? res.authors?.map((author: any) => {
+															return author.name;
+													})
+													: "-"
+										}`}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Source: {res.source}
+									{page === "anime"
+										? `Source: ${res.source}`
+										: `Serializations: ${
+												res.serializations?.length > 0
+													? res.serializations?.map((serial: any) => {
+															return serial.name;
+													})
+													: "-"
+										}`}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Theme: {res.themes?.length > 0 ? res.themes[0].name : "-"}
+									Theme: {res.themes?.length > 0 ? res.themes?.map( (theme: any) => { return `${theme.name} ` }) : "-"}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									Demographic:{" "}
 									{res.demographics?.length > 0
-										? res.demographics[0].name
+										? res.demographics?.map((demographic: any) => { return `${demographic.name} ` })
 										: "-"}
 								</p>
 							</div>

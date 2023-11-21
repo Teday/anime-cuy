@@ -29,16 +29,18 @@ export const Header = () => {
 						className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
 					>
 						<div className='overflow-auto max-h-96'>
-							<Link
-								href={"/"}
-								className='text-md hover:text-yellow-500'
-							>
-								Home
-							</Link>
 							{listMenu.map((list: any, i: number) => {
 								return (
 									<li key={i}>
-										<a>{list.title}</a>
+										{list.url ? (
+											<Link
+												href={list.url}
+											>
+												{list.title}
+											</Link>
+										) : (
+											<a>{list.title}</a>
+										)}
 										{list.sub_menu.map((sub: any, idx: number) => {
 											return (
 												<ul className='p-2' key={idx}>
@@ -56,17 +58,23 @@ export const Header = () => {
 				</div>
 			</div>
 			<div className='navbar-center hidden md:flex lg:flex'>
-				<Link href={"/"} className='normal-case text-md hover:text-yellow-500'>
-					Home
-				</Link>
 				{listMenu.map((res: any, i: number) => (
 					<div className='dropdown dropdown-hover cursor-pointer' key={i}>
-						<label
-							tabIndex={0}
-							className='mx-4 cursor-pointer hover:text-yellow-500'
-						>
-							{res.title}
-						</label>
+						{res.url ? (
+							<Link
+								href={res.url}
+								className='mx-4 cursor-pointer hover:text-yellow-500'
+							>
+								{res.title}
+							</Link>
+						) : (
+							<label
+								tabIndex={0}
+								className='mx-4 cursor-pointer hover:text-yellow-500'
+							>
+								{res.title}
+							</label>
+						)}
 						<ul
 							tabIndex={0}
 							className='dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52'

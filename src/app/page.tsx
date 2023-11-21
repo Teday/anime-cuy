@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Layout, List } from "@/components";
-import { getAnime, getAnimeNested } from "@/libs";
+import { getData, getAnimeNested } from "@/libs";
 import { randomAnime } from "@/utils";
 
 const Page = () => {
@@ -19,13 +19,13 @@ const Page = () => {
 	}, []);
 
 	const fetchData = async () => {
-		const getAnimeSeason = await getAnime("seasons/now?limit=15");
-		const getAnimeUpcoming = await getAnime("seasons/upcoming?limit=15");
-		const getAnimePopuler = await getAnime("top/anime?limit=15");
+		const getAnimeSeason = await getData("seasons/now?limit=15");
+		const getAnimeUpcoming = await getData("seasons/upcoming?limit=15");
+		const getAnimePopuler = await getData("top/anime?limit=15");
 
 		//biar gk kena limit dari api jikan
 		setTimeout(async () => {
-			const getAnimeLastUpdate = await getAnime("watch/episodes?limit=15");
+			const getAnimeLastUpdate = await getData("watch/episodes?limit=15");
 			const getAnimeRecommendations = await getAnimeNested(
 				"recommendations/anime",
 				"entry"
@@ -33,7 +33,7 @@ const Page = () => {
 			const getAnimeRecom = randomAnime(getAnimeRecommendations, 15);
 			setAnimeLastUpdate(getAnimeLastUpdate);
 			setAnimeRecommendation(getAnimeRecom);
-		}, 1000);
+		}, 1500);
 
 		setAnimeSeason(getAnimeSeason);
 		setAnimeUpcoming(getAnimeUpcoming);

@@ -8,7 +8,7 @@ import {
 	DropdownType,
 	Skeleton,
 } from "@/components";
-import { getAnime } from "@/libs";
+import { getData } from "@/libs";
 import { scroolTop } from "@/utils";
 import { listType, listRating, listFilter, listSkeletonPage } from "@/data";
 
@@ -30,7 +30,7 @@ const Page = () => {
 	const fetchData = async () => {
 		setIsLoading(true);
 		scroolTop();
-		const animePopuler = await getAnime(
+		const animePopuler = await getData(
 			`top/anime?page=${page}&limit=20&limit=${15}&page=${page}${
 				type !== "" ? `&type=${type}` : ""
 			}${rating !== "" ? `&rating=${rating}` : ""}${
@@ -80,7 +80,7 @@ const Page = () => {
 							</div>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-lg md:text-base text-sm p-1.5'>
-									Total: {totalData} Anime
+									Total: {totalData}
 								</h5>
 							</div>
 						</div>
@@ -89,7 +89,7 @@ const Page = () => {
 								<Skeleton dataSkeleton={listSkeletonPage} />
 							</div>
 						) : (
-							<ListPage anime={anime} />
+							<ListPage data={anime} page="anime" />
 						)}
 					</div>
 				</div>

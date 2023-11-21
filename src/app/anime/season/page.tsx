@@ -9,7 +9,7 @@ import {
 	Skeleton,
 	SelectSearch,
 } from "@/components";
-import { getAnime } from "@/libs";
+import { getData } from "@/libs";
 import { scroolTop } from "@/utils";
 import { listType, listSkeletonPage } from "@/data";
 
@@ -32,14 +32,14 @@ const Page = () => {
 	const fetchData = async () => {
 		setIsLoading(true);
 		scroolTop();
-		const animeSeasons = await getAnime(
+		const animeSeasons = await getData(
 			`seasons${urlSeason}?page=${page}&limit=20${
 				type !== "" ? `&filter=${type}` : ""
 			}`
 		);
 		if (listSeason.length === 0) {
 			let list: any = [];
-			const listSeasons = await getAnime(`seasons`);
+			const listSeasons = await getData(`seasons`);
 			listSeasons.data?.map((season: any) => {
 				season.seasons?.reverse().map((res: any) => {
 					list.push({
@@ -90,7 +90,7 @@ const Page = () => {
 							</div>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-xl md:text-base text-sm mt-2'>
-									Total: {totalData} Anime
+									Total: {totalData}
 								</h5>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ const Page = () => {
 								<Skeleton dataSkeleton={listSkeletonPage} />
 							</div>
 						) : (
-							<ListPage anime={anime} />
+							<ListPage data={anime} page="anime" />
 						)}
 					</div>
 				</div>
