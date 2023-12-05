@@ -25,6 +25,7 @@ export const ListPage = ({ data, page }: props) => {
 						>
 							<figure>
 								<Image
+									unoptimized
 									className='w-full max-h-[200px] min-h-[200px] object-cover object-top rounded-t-box'
 									src={res.images.webp.image_url}
 									width={500}
@@ -43,7 +44,7 @@ export const ListPage = ({ data, page }: props) => {
 									{page === "anime"
 										? `Episode: ${
 												res.episodes === null ? "?" : res.episodes
-										} Eps,
+										  } Eps,
 										${res.duration}`
 										: `Chapter: ${res.chapters === null ? "?" : res.chapters}`}
 								</p>
@@ -72,16 +73,16 @@ export const ListPage = ({ data, page }: props) => {
 												res.studios?.length > 0
 													? res.studios?.map((studio: any) => {
 															return studio.name;
-													})
+													  })
 													: "-"
-										}`
+										  }`
 										: `Author: ${
 												res.authors?.length > 0
 													? res.authors?.map((author: any) => {
 															return author.name;
-													})
+													  })
 													: "-"
-										}`}
+										  }`}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									{page === "anime"
@@ -90,17 +91,24 @@ export const ListPage = ({ data, page }: props) => {
 												res.serializations?.length > 0
 													? res.serializations?.map((serial: any) => {
 															return serial.name;
-													})
+													  })
 													: "-"
-										}`}
+										  }`}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
-									Theme: {res.themes?.length > 0 ? res.themes?.map( (theme: any) => { return `${theme.name} ` }) : "-"}
+									Theme:{" "}
+									{res.themes?.length > 0
+										? res.themes?.map((theme: any) => {
+												return `${theme.name} `;
+										  })
+										: "-"}
 								</p>
 								<p className='text-[10px] text-gray-300 m-0'>
 									Demographic:{" "}
 									{res.demographics?.length > 0
-										? res.demographics?.map((demographic: any) => { return `${demographic.name} ` })
+										? res.demographics?.map((demographic: any) => {
+												return `${demographic.name} `;
+										  })
 										: "-"}
 								</p>
 							</div>

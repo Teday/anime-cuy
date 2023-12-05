@@ -105,6 +105,7 @@ const Page = ({ params }: props) => {
 											<div className='skeleton w-full h-[500px] '></div>
 										) : (
 											<Image
+												unoptimized
 												className='w-full object-cover rounded-md'
 												src={anime.data?.images.webp.image_url}
 												width={250}

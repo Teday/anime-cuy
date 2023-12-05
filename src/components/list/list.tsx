@@ -13,9 +13,12 @@ interface props {
 }
 
 export const List = ({ anime, title, url, episode }: props) => {
-	
 	return (
-		<div className={`w-full snap-x rounded-box lg:px-6 md:px-4 p-2 ${ anime.data?.length <= 0 ? 'hidden' : 'visible' }`}>
+		<div
+			className={`w-full snap-x rounded-box lg:px-6 md:px-4 p-2 ${
+				anime.data?.length <= 0 ? "hidden" : "visible"
+			}`}
+		>
 			<div className='card shadow-xl'>
 				<div
 					className={`bg-base-100 grid rounded-t-lg p-2 ${
@@ -65,6 +68,7 @@ export const List = ({ anime, title, url, episode }: props) => {
 										{episode ? (
 											<>
 												<Image
+													unoptimized
 													className='w-full h-full top-0 left-0 object-cover rounded-box'
 													src={res.entry.images.webp.image_url}
 													width={500}
@@ -85,6 +89,7 @@ export const List = ({ anime, title, url, episode }: props) => {
 										) : (
 											<>
 												<Image
+													unoptimized
 													className='w-full h-full top-0 left-0 object-cover rounded-box'
 													src={res.images.webp.image_url}
 													width={500}

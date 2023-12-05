@@ -9,6 +9,7 @@ const nextConfig = {
 		base_url: "https://api.jikan.moe/v4",
 	},
 	images: {
+        unoptimized: true,
         remotePatterns: [
             {
                 hostname: "cdn.myanimelist.net"
