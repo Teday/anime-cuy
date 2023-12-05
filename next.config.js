@@ -9,8 +9,12 @@ const nextConfig = {
 		base_url: "https://api.jikan.moe/v4",
 	},
 	images: {
-		domains: ["cdn.myanimelist.net"],
-	},
+        remotePatterns: [
+            {
+                hostname: "cdn.myanimelist.net"
+            }
+        ]
+    }
 };
 
 module.exports = withPWA(nextConfig);
