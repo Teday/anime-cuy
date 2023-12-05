@@ -106,7 +106,7 @@ const Page = ({ params }: props) => {
 										) : (
 											<Image
 												className='w-full object-cover rounded-md'
-												src={anime.data?.images.jpg.image_url}
+												src={anime.data?.images.webp.image_url}
 												width={250}
 												height={250}
 												alt='images anime'

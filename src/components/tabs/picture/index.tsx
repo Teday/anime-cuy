@@ -28,7 +28,7 @@ export const Pictures = ({ anime }: props) => {
 						return (
 							<Image
 								className='object-fill rounded-lg px-6 sm:px-6 md:px-8 py-6'
-								src={picture.jpg.image_url}
+								src={picture.webp.image_url}
 								width={300}
 								height={300}
 								alt='images anime'

@@ -37,7 +37,7 @@ export const Char = ({ anime }: props) => {
 									<div className='flex w-full'>
 										<Image
 											className='h-[150px] w-[100px] object-fill rounded-lg'
-											src={char.character.images.jpg.image_url}
+											src={char.character.images.webp.image_url}
 											width={300}
 											height={300}
 											alt='images anime'

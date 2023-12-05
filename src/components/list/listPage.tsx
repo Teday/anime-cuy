@@ -26,7 +26,7 @@ export const ListPage = ({ data, page }: props) => {
 							<figure>
 								<Image
 									className='w-full max-h-[200px] min-h-[200px] object-cover object-top rounded-t-box'
-									src={res.images.jpg.image_url}
+									src={res.images.webp.image_url}
 									width={500}
 									height={500}
 									alt='images anime'

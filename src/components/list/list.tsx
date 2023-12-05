@@ -66,7 +66,7 @@ export const List = ({ anime, title, url, episode }: props) => {
 											<>
 												<Image
 													className='w-full h-full top-0 left-0 object-cover rounded-box'
-													src={res.entry.images.jpg.image_url}
+													src={res.entry.images.webp.image_url}
 													width={500}
 													height={500}
 													alt='images anime'
@@ -86,7 +86,7 @@ export const List = ({ anime, title, url, episode }: props) => {
 											<>
 												<Image
 													className='w-full h-full top-0 left-0 object-cover rounded-box'
-													src={res.images.jpg.image_url}
+													src={res.images.webp.image_url}
 													width={500}
 													height={500}
 													alt='images anime'
