@@ -6,7 +6,6 @@ import { getData, getAnimeNested } from "@/libs";
 import { randomAnime } from "@/utils";
 
 const Page = () => {
-	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [animePopuler, setAnimePopuler] = useState<any>([]);
 	const [animeUpcoming, setAnimeUpcoming] = useState<any>([]);
 	const [animeLastUpdate, setAnimeLastUpdate] = useState<any>([]);
@@ -38,7 +37,6 @@ const Page = () => {
 		setAnimeSeason(getAnimeSeason);
 		setAnimeUpcoming(getAnimeUpcoming);
 		setAnimePopuler(getAnimePopuler);
-		setIsLoading(false);
 	};
 
 	return (
