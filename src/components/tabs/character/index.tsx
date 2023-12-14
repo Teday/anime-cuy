@@ -3,20 +3,22 @@
 import Image from "next/image";
 import { listSkeletonChar } from "@/data";
 interface props {
-	anime: any;
+	char: any;
+	type: string;
 }
 
-export const Char = ({ anime }: props) => {
+export const Char = ({ char, type }: props) => {
+
 	return (
 		<div className='w-full px-3 pt-4'>
 			<div
 				className={`grid ${
-					anime.data?.length <= 0
+					char.data?.length <= 0
 						? "grid-cols-1"
 						: "lg:grid-cols-2 sm:grid-cols-1"
 				} gap-2`}
 			>
-				{anime.data === undefined ? (
+				{char.data === undefined ? (
 					listSkeletonChar.map((res: any) => {
 						return (
 							<div className='flex flex-row gap-4 w-full' key={res.no}>
@@ -33,12 +35,12 @@ export const Char = ({ anime }: props) => {
 							</div>
 						);
 					})
-				) : anime.data?.length <= 0 ? (
+				) : char.data?.length <= 0 ? (
 					<div className='flex items-center justify-center w-full pt-4 '>
 						<p className=''>There is no character data yet</p>
 					</div>
 				) : (
-					anime.data?.map((char: any, i: number) => {
+					char.data?.map((char: any, i: number) => {
 						return (
 							<div className='w-full border-b border-white py-1' key={i}>
 								<div className='flex w-full'>
@@ -48,20 +50,24 @@ export const Char = ({ anime }: props) => {
 										src={char.character.images.webp.image_url}
 										width={300}
 										height={300}
-										alt='images anime'
+										alt='images char'
 										key={i}
 									/>
 									<div className='flex flex-col'>
 										<p className='text-sm ml-2'>Name: {char.character.name}</p>
 										<p className='text-sm ml-2'>role: {char.role} Character</p>
-										<p className='text-sm ml-2'>Voice Actor: </p>
-										{char.voice_actors?.map((voice: any, idx: number) => {
-											return (
-												<p className='text-sm ml-2' key={idx}>
-													{voice.person.name} ({voice.language})
-												</p>
-											);
-										})}
+										{ type === 'anime' ? (
+											<>
+												<p className='text-sm ml-2'>Voice Actor: </p>
+												{char.voice_actors?.map((voice: any, idx: number) => {
+													return (
+														<p className='text-sm ml-2' key={idx}>
+															{voice.person.name} ({voice.language})
+														</p>
+													);
+												})}
+											</>
+										) : null }
 									</div>
 								</div>
 							</div>

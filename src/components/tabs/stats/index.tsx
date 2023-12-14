@@ -4,15 +4,17 @@ import { formatNumber } from "@/utils";
 import { listSkeletonStats } from "@/data";
 
 interface props {
-	anime: any;
+	stats: any;
+	type: string;
 }
 
-export const Stats = ({ anime }: props) => {
+export const Stats = ({ stats, type }: props) => {
+
 	return (
 		<div className='w-full px-3 pt-4'>
 			<div className='w-full mt-4'>
 				<h3 className='border-white border-b-2'>Summary Stats</h3>
-				{anime.data === undefined ? (
+				{stats.data === undefined ? (
 					listSkeletonStats.map((res: any) => {
 						return(
 							<div key={res.no}>
@@ -20,29 +22,29 @@ export const Stats = ({ anime }: props) => {
 							</div>
 						)
 					})
-				) : anime.data?.length <= 0 ? (
+				) : stats.data?.length <= 0 ? (
 					<div className='flex items-center justify-center w-full pt-4 '>
 						<p className=''>There is no statistical data yet</p>
 					</div>
 				) : (
 					<>
 						<p className='text-md sm:text-sm'>
-							Watching: {formatNumber(anime.data?.watching)}
+							{ type === 'anime' ? `Watching : ${formatNumber(stats.data?.watching)}` : `Reading : ${formatNumber(stats.data?.reading)}`}
 						</p>
 						<p className='text-md sm:text-sm'>
-							Completed: {formatNumber(anime.data?.completed)}
+							Completed: {formatNumber(stats.data?.completed)}
 						</p>
 						<p className='text-md sm:text-sm'>
-							On-Hold: {formatNumber(anime.data?.on_hold)}
+							On-Hold: {formatNumber(stats.data?.on_hold)}
 						</p>
 						<p className='text-md sm:text-sm'>
-							Dropped: {formatNumber(anime.data?.dropped)}
+							Dropped: {formatNumber(stats.data?.dropped)}
 						</p>
 						<p className='text-md sm:text-sm'>
-							Plan to Watch: {formatNumber(anime.data?.plan_to_watch)}
+							{ type === 'anime' ? `Plan to Watch: ${formatNumber(stats.data?.plan_to_watch)}` : `Plan to Reading : ${formatNumber(stats.data?.plan_to_read)}`}
 						</p>
 						<p className='text-md sm:text-sm'>
-							Total: {formatNumber(anime.data?.total)}
+							Total: {formatNumber(stats.data?.total)}
 						</p>
 					</>
 				)}
@@ -50,7 +52,7 @@ export const Stats = ({ anime }: props) => {
 			<div className='w-full mt-4'>
 				<h3 className='border-white border-b-2'>Score Stats</h3>
 				<div className='flex flex-col'>
-					{anime.data === undefined ? (
+					{stats.data === undefined ? (
 						listSkeletonStats.map((res: any) => {
 							return(
 								<div key={res.no}>
@@ -58,12 +60,12 @@ export const Stats = ({ anime }: props) => {
 								</div>
 							)
 						})
-					) : anime.data?.length <= 0 ? (
+					) : stats.data?.length <= 0 ? (
 						<div className='flex items-center justify-center w-full pt-4 '>
 							<p className=''>There is no score statistical data yet</p>
 						</div>
 					) : (
-						anime.data?.scores.reverse().map((data: any, i: number) => {
+						stats.data?.scores.reverse().map((data: any, i: number) => {
 							return (
 								<div className='p-2 flex' key={i}>
 									<p className='pr-4'>{data.score}</p>

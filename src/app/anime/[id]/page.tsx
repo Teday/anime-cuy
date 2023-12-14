@@ -329,14 +329,14 @@ const Page = ({ params }: props) => {
 												activeTabs === "detail" ? "visible" : "hidden"
 											}`}
 										>
-											<Detail anime={anime} isLoading={isLoading} />
+											<Detail detail={anime} isLoading={isLoading} type="anime"/>
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "char" ? "visible" : "hidden"
 											}`}
 										>
-											<Char anime={animeChar} />
+											<Char char={animeChar} type="anime"/>
 										</div>
 										<div
 											className={`w-full ${
@@ -350,14 +350,14 @@ const Page = ({ params }: props) => {
 												activeTabs === "stats" ? "visible" : "hidden"
 											}`}
 										>
-											<Stats anime={animeStatistics} />
+											<Stats stats={animeStatistics} type="anime"/>
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "picture" ? "visible" : "hidden"
 											}`}
 										>
-											<Pictures anime={animePictures} />
+											<Pictures picture={animePictures} />
 										</div>
 									</div>
 								</div>

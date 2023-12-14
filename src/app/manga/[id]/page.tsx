@@ -18,12 +18,12 @@ const Page = ({ params }: props) => {
 	const [isInformasi, setIsInformasi] = useState<boolean>(true);
 	const [isStatistic, setIsStatistic] = useState<boolean>(true);
 	const [activeTabs, setActiveTabs] = useState<string>("detail");
-	const [anime, setAnime] = useState<any>({ data: [] });
-	const [animeChar, setAnimeChar] = useState<any>([]);
-	const [animeEpisodes, setAnimeEpisodes] = useState<any>([]);
+	const [manga, setmanga] = useState<any>({ data: [] });
+	const [mangaChar, setmangaChar] = useState<any>([]);
+	const [mangaEpisodes, setmangaEpisodes] = useState<any>([]);
 	const [pageEpisode, setPageEpisode] = useState<number>(1);
-	const [animeStatistics, setAnimeStatistics] = useState<any>([]);
-	const [animePictures, setAnimePictures] = useState<any>([]);
+	const [mangaStatistics, setmangaStatistics] = useState<any>([]);
+	const [mangaPictures, setmangaPictures] = useState<any>([]);
 
 	useEffect(() => {
 		fetchData();
@@ -31,39 +31,39 @@ const Page = ({ params }: props) => {
 	}, []);
 
 	const fetchData = async () => {
-		const animeDetail = await getData(`anime/${params.id}/full`);
-		setAnime(animeDetail);
+		const mangaDetail = await getData(`manga/${params.id}/full`);
+		setmanga(mangaDetail);
 		setIsLoading(false);
 	};
 
 	const fetchDataChar = async () => {
-		if (!animeChar.data) {
+		if (!mangaChar.data) {
 			//biar keliatan loading 😂
 			setTimeout(async () => {
-				const animeChars = await getData(`anime/${params.id}/characters`);
-				setAnimeChar(animeChars);
+				const mangaChars = await getData(`manga/${params.id}/characters`);
+				setmangaChar(mangaChars);
 			}, 1000);
 		}
 	};
 
 	const fetchDataEpisode = async () => {
-		if (!animeEpisodes.data) {
+		if (!mangaEpisodes.data) {
 			//biar keliatan loading 😂
 			setTimeout(async () => {
-				const animeEpisode = await getData(
-					`anime/${params.id}/episodes?page=${pageEpisode}`
+				const mangaEpisode = await getData(
+					`manga/${params.id}/episodes?page=${pageEpisode}`
 				);
-				setAnimeEpisodes(animeEpisode);
+				setmangaEpisodes(mangaEpisode);
 			}, 1000);
 		}
 	};
 
 	const fetchDataStats = async () => {
-		if (!animeStatistics.data) {
+		if (!mangaStatistics.data) {
 			//biar keliatan loading 😂
 			setTimeout(async () => {
-				const animeStatistic = await getData(`anime/${params.id}/statistics`);
-				setAnimeStatistics(animeStatistic);
+				const mangaStatistic = await getData(`manga/${params.id}/statistics`);
+				setmangaStatistics(mangaStatistic);
 			}, 1000);
 		}
 	};
@@ -71,8 +71,8 @@ const Page = ({ params }: props) => {
 	const fetchDataPictures = async () => {
 		//biar keliatan loading 😂
 		setTimeout( async () => {
-			const animePicture = await getData(`anime/${params.id}/pictures`);
-			setAnimePictures(animePicture);
+			const mangaPicture = await getData(`manga/${params.id}/pictures`);
+			setmangaPictures(mangaPicture);
 		}, 1000)
 	};
 
@@ -84,11 +84,11 @@ const Page = ({ params }: props) => {
 						<div className='bg-base-100 w-full rounded-t-lg p-2'>
 							<div className='w-full text-center'>
 								<h5 className='font-semibold lg:text-xl md:text-base text-sm'>
-									{anime.data?.title}
+									{manga.data?.title}
 								</h5>
 							</div>
 						</div>
-						{anime.data === undefined ? (
+						{manga.data === undefined ? (
 							<div className='h-screen'>
 								<div className='flex items-center justify-center'>
 									<p className=' text-[200px]'>🙏</p>
@@ -107,10 +107,10 @@ const Page = ({ params }: props) => {
 											<Image
 												unoptimized
 												className='w-full object-cover rounded-md'
-												src={anime.data?.images.webp.image_url}
+												src={manga.data?.images.webp.image_url}
 												width={250}
 												height={250}
-												alt='images anime'
+												alt='images manga'
 											/>
 										)}
 									</div>
@@ -138,53 +138,23 @@ const Page = ({ params }: props) => {
 												</div>
 												<div className='collapse-content'>
 													<p className='text-xs mb-1'>
-														Type: {anime.data?.type}
+														Type: {manga.data?.type}
 													</p>
 													<p className='text-xs mb-1'>
-														Episodes: {anime.data?.episodes}
+														Volumes: {manga.data?.volumes === null ? '?' : manga.data?.volumes }
 													</p>
 													<p className='text-xs mb-1'>
-														Status: {anime.data?.status}
+														Chapters: {manga.data?.chapters === null ? '?' : manga.data?.chapters }
 													</p>
 													<p className='text-xs mb-1'>
-														Aired: {anime.data?.aired?.string}
+														Status: {manga.data?.status}
 													</p>
 													<p className='text-xs mb-1'>
-														Season: {anime.data?.season} {anime.data?.year}
-													</p>
-													<p className='text-xs mb-1'>
-														Broadcast: {anime.data?.broadcast?.string}
-													</p>
-													<p className='text-xs mb-1'>
-														Producers:{" "}
-														{anime.data?.producers?.map(
-															(producer: any, i: number, idx: any) => {
-																return (
-																	<span key={i}>{` ${producer.name} ${
-																		idx.length === i + 1 ? "" : ","
-																	}`}</span>
-																);
-															}
-														)}
-													</p>
-													<p className='text-xs mb-1'>
-														Studios:{" "}
-														{anime.data?.studios?.map(
-															(studio: any, i: number, idx: any) => {
-																return (
-																	<span key={i}>{` ${studio.name} ${
-																		idx.length === i + 1 ? "" : ","
-																	}`}</span>
-																);
-															}
-														)}
-													</p>
-													<p className='text-xs mb-1'>
-														Source: {anime.data?.source}
+														Published: {manga.data?.published?.string}
 													</p>
 													<p className='text-xs mb-1'>
 														Genres:{" "}
-														{anime.data?.genres?.map(
+														{manga.data?.genres?.map(
 															(genre: any, i: number, idx: any) => {
 																return (
 																	<span key={i}>{` ${genre.name} ${
@@ -195,20 +165,8 @@ const Page = ({ params }: props) => {
 														)}
 													</p>
 													<p className='text-xs mb-1'>
-														Theme:{" "}
-														{anime.data?.themes?.map(
-															(theme: any, i: number, idx: any) => {
-																return (
-																	<span key={i}>{` ${theme.name} ${
-																		idx.length === i + 1 ? "" : ","
-																	}`}</span>
-																);
-															}
-														)}
-													</p>
-													<p className='text-xs mb-1'>
 														Demographic:{" "}
-														{anime.data?.demographics?.map(
+														{manga.data?.demographics?.map(
 															(demographic: any, i: number, idx: any) => {
 																return (
 																	<span key={i}>{` ${demographic.name} ${
@@ -219,10 +177,26 @@ const Page = ({ params }: props) => {
 														)}
 													</p>
 													<p className='text-xs mb-1'>
-														Duration: {anime.data?.duration}
+														Serialization: {manga.data?.serializations?.map(
+															(serialization: any, i: number, idx: any) => {
+																return (
+																	<span key={i}>{` ${serialization.name} ${
+																		idx.length === i + 1 ? "" : ","
+																	}`}</span>
+																);
+															}
+														)}
 													</p>
 													<p className='text-xs mb-1'>
-														Rating: {anime.data?.rating}
+														Authors: {manga.data?.authors?.map(
+															(author: any, i: number, idx: any) => {
+																return (
+																	<span key={i}>{` ${author.name} ${
+																		idx.length === i + 1 ? "" : ","
+																	}`}</span>
+																);
+															}
+														)}
 													</p>
 												</div>
 											</div>
@@ -252,20 +226,20 @@ const Page = ({ params }: props) => {
 												</div>
 												<div className='collapse-content'>
 													<p className='text-xs mb-1'>
-														Score: {formatNumber(anime.data?.score)} (score by{" "}
-														{formatNumber(anime.data?.scored_by)} users)
+														Score: {formatNumber(manga.data?.score)} (score by{" "}
+														{formatNumber(manga.data?.scored_by)} users)
 													</p>
 													<p className='text-xs mb-1'>
-														Ranked: {formatNumber(anime.data?.rank)}
+														Ranked: {formatNumber(manga.data?.rank)}
 													</p>
 													<p className='text-xs mb-1'>
-														Popularity: {formatNumber(anime.data?.popularity)}
+														Popularity: {formatNumber(manga.data?.popularity)}
 													</p>
 													<p className='text-xs mb-1'>
-														Members: {formatNumber(anime.data?.members)}
+														Members: {formatNumber(manga.data?.members)}
 													</p>
 													<p className='text-xs mb-1'>
-														Favorites: {formatNumber(anime.data?.favorites)}
+														Favorites: {formatNumber(manga.data?.favorites)}
 													</p>
 												</div>
 											</div>
@@ -298,16 +272,6 @@ const Page = ({ params }: props) => {
 												name='my_tabs_1'
 												className='tab text-white'
 												onChange={() => {
-													setActiveTabs("episode");
-													fetchDataEpisode();
-												}}
-												aria-label='Episodes'
-											/>
-											<input
-												type='radio'
-												name='my_tabs_1'
-												className='tab text-white'
-												onChange={() => {
 													fetchDataStats();
 													setActiveTabs("stats");
 												}}
@@ -329,35 +293,28 @@ const Page = ({ params }: props) => {
 												activeTabs === "detail" ? "visible" : "hidden"
 											}`}
 										>
-											<Detail anime={anime} isLoading={isLoading} />
+											<Detail detail={manga} isLoading={isLoading} type="manga" />
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "char" ? "visible" : "hidden"
 											}`}
 										>
-											<Char anime={animeChar} />
-										</div>
-										<div
-											className={`w-full ${
-												activeTabs === "episode" ? "visible" : "hidden"
-											}`}
-										>
-											<Episode anime={animeEpisodes} />
+											<Char char={mangaChar} type="manga"/>
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "stats" ? "visible" : "hidden"
 											}`}
 										>
-											<Stats anime={animeStatistics} />
+											<Stats stats={mangaStatistics} type="manga"/>
 										</div>
 										<div
 											className={`w-full ${
 												activeTabs === "picture" ? "visible" : "hidden"
 											}`}
 										>
-											<Pictures anime={animePictures} />
+											<Pictures picture={mangaPictures} />
 										</div>
 									</div>
 								</div>

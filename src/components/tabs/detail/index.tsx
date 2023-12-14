@@ -1,36 +1,39 @@
 "use client";
 
 import YouTube from "react-youtube";
+import Link from "next/link";
 
 interface props {
-	anime: any;
+	detail: any;
+	type: string;
 	isLoading: boolean;
 }
 
-export const Detail = ({ anime, isLoading }: props) => {
+export const Detail = ({ detail, isLoading, type }: props) => {
+	
 	return (
 		<div className='w-full px-3 pt-4'>
-			{isLoading ? (
+			{isLoading && type === 'anime' ? (
 				<div className='w-full lg:px-20 sm:px-2 md:px-16 pt-4'>
 					<div className='skeleton w-full h-[400px]'></div>
 				</div>
-			) : (
+			) : type === "anime" ? (
 				<YouTube
 					className='w-full lg:px-20 sm:px-2 md:px-16 pt-4'
 					opts={{
 						width: "100%",
 						height: 350,
 					}}
-					videoId={anime.data?.trailer.youtube_id}
+					videoId={detail.data?.trailer.youtube_id}
 					onReady={(e: any) => e.target.pauseVideo()}
 				/>
-			)}
+			) : null}
 			<div className='w-full mt-4 border-white border-b-2'>
 				<h3>Synopsis :</h3>
 				{isLoading ? (
 					<div className='skeleton w-full h-4 my-2'></div>
 				) : (
-					<p className='text-md sm:text-sm'>{anime.data?.synopsis}</p>
+					<p className='text-md sm:text-sm'>{detail.data?.synopsis}</p>
 				)}
 			</div>
 			<div className='w-full pt-6 border-white border-b-2'>
@@ -38,51 +41,77 @@ export const Detail = ({ anime, isLoading }: props) => {
 				{isLoading ? (
 					<div className='skeleton w-full h-4 my-2'></div>
 				) : (
-					<p className='text-md sm:text-sm'>{anime.data?.background}</p>
+					<p className='text-md sm:text-sm'>{detail.data?.background}</p>
 				)}
 			</div>
 			<div className='w-full pt-6 border-white border-b-2'>
-				<h3>Related Anime :</h3>
+				<h3>Related data :</h3>
 				{isLoading ? (
 					<div className='skeleton w-full h-4 my-2'></div>
 				) : (
-					anime.data?.relations?.map((relation: any, i: number) => {
+					detail.data?.relations?.map((relation: any, i: number) => {
 						return (
-							<p className='text-md sm:text-sm' key={i}>
-								{relation.relation} : {relation.entry[0].name}
-							</p>
+							<div className='flex w-full'>
+								<div className='w-1/4'>
+									<p className='text-md sm:text-sm' key={i}>
+										{relation.relation}
+									</p>
+								</div>
+								<div className='mx-1'>:</div>
+								<div className='w-full'>
+									{relation.entry.map((entry: any, idx: number, datas: any) => {
+										return (
+											<Link
+												href={`${
+													entry.type === "anime"
+														? `/anime/${entry.mal_id}`
+														: `/manga/${entry.mal_id}`
+												}`}
+												className='text-md sm:text-sm cursor-pointer hover:text-blue-400 hover:underline'
+												key={i}
+											>
+												{entry.name}{ idx + 1 === datas.length ? "" : ", " }
+											</Link>
+										);
+									})}
+								</div>
+							</div>
 						);
 					})
 				)}
 			</div>
-			<div className='w-full pt-6 border-white border-b-2'>
-				<h3>Opening Theme :</h3>
-				{isLoading ? (
-					<div className='skeleton w-full h-4 my-2'></div>
-				) : (
-					anime.data?.theme?.openings.map((opening: any, i: number) => {
-						return (
-							<p className='text-md sm:text-sm' key={i}>
-								{opening}
-							</p>
-						);
-					})
-				)}
-			</div>
-			<div className='w-full pt-6 border-white border-b-2'>
-				<h3>Ending Theme :</h3>
-				{isLoading ? (
-					<div className='skeleton w-full h-4 my-2'></div>
-				) : (
-					anime.data?.theme?.endings.map((ending: any, i: number) => {
-						return (
-							<p className='text-md sm:text-sm' key={i}>
-								{ending}
-							</p>
-						);
-					})
-				)}
-			</div>
+			{type === "anime" ? (
+				<>
+					<div className='w-full pt-6 border-white border-b-2'>
+						<h3>Opening Theme :</h3>
+						{isLoading ? (
+							<div className='skeleton w-full h-4 my-2'></div>
+						) : (
+							detail.data?.theme?.openings.map((opening: any, i: number) => {
+								return (
+									<p className='text-md sm:text-sm' key={i}>
+										{opening}
+									</p>
+								);
+							})
+						)}
+					</div>
+					<div className='w-full pt-6 border-white border-b-2'>
+						<h3>Ending Theme :</h3>
+						{isLoading ? (
+							<div className='skeleton w-full h-4 my-2'></div>
+						) : (
+							detail.data?.theme?.endings.map((ending: any, i: number) => {
+								return (
+									<p className='text-md sm:text-sm' key={i}>
+										{ending}
+									</p>
+								);
+							})
+						)}
+					</div>
+				</>
+			) : null}
 		</div>
 	);
 };

@@ -4,13 +4,13 @@ import Image from "next/image";
 import { listSkeletonPicture } from "@/data";
 
 interface props {
-	anime: any;
+	picture: any;
 }
 
-export const Pictures = ({ anime }: props) => {
+export const Pictures = ({ picture }: props) => {
 	return (
 		<div className='w-full px-3 pt-4'>
-			{anime.data === undefined ? (
+			{picture.data === undefined ? (
 				<div className='grid grid-cols-2'>
 					{listSkeletonPicture.map((res: any) => {
 						return (
@@ -21,11 +21,11 @@ export const Pictures = ({ anime }: props) => {
 						);
 					})}
 				</div>
-			) : anime.data?.length <= 0 ? (
+			) : picture.data?.length <= 0 ? (
 				<h3>No pictures yet</h3>
 			) : (
 				<div className='grid grid-cols-2'>
-					{anime.data?.map((picture: any, i: number) => {
+					{picture.data?.map((picture: any, i: number) => {
 						return (
 							<Image
 								unoptimized
@@ -33,7 +33,7 @@ export const Pictures = ({ anime }: props) => {
 								src={picture.webp.image_url}
 								width={300}
 								height={300}
-								alt='images anime'
+								alt='images picture'
 								key={i}
 							/>
 						);
