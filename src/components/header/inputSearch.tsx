@@ -28,6 +28,7 @@ export const InputSearch = () => {
 					Anime
 				</option>
 				<option value="manga">Manga</option>
+				<option value="character">Character</option>
 			</select>
 			<div className='relative join-item'>
 				<input

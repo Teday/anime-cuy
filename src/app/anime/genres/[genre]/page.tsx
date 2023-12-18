@@ -14,7 +14,7 @@ import { listType, listRating, listStatus, listSkeletonPage } from "@/data";
 
 interface props {
 	params: {
-		keyword: string;
+		genre: string;
 	};
 }
 
@@ -38,7 +38,7 @@ const Page = ({ params }: props) => {
 		setIsLoading(true);
 		scroolTop();
 		const animeSearch = await getData(
-			`anime?limit=${15}&page=${page}${
+			`anime?q=${params.genre}&limit=${15}&page=${page}${
 				type !== "" ? `&type=${type}` : ""
 			}${rating !== "" ? `&rating=${rating}` : ""}${
 				status !== "" ? `&status=${status}` : ""
@@ -58,7 +58,7 @@ const Page = ({ params }: props) => {
 						<div className='grid grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
 							<div className='w-full text-center'>
 								<h5 className='lg:pl-6 md:pl-6 font-semibold lg:text-xl md:text-base text-sm'>
-									Anime
+									{decodeURI(params.genre)}
 								</h5>
 							</div>
 						</div>

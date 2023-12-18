@@ -31,7 +31,7 @@ const Page = () => {
 		setIsLoading(true);
 		scroolTop();
 		const animePopuler = await getData(
-			`top/anime?page=${page}&limit=20&limit=${15}&page=${page}${
+			`top/anime?limit=${15}&page=${page}${
 				type !== "" ? `&type=${type}` : ""
 			}${rating !== "" ? `&rating=${rating}` : ""}${
 				filter !== "" ? `&filter=${filter}` : ""

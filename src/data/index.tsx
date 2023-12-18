@@ -8,9 +8,7 @@ export const listMenu = [
         title: "Anime",
         sub_menu: [ 
             { title: "Top Anime", url: "/anime/top" },
-            { title: "Seasonal Anime", url: "/anime/season" },
-            // { title: "Videos", url: "/anime/video" },
-            // { title: "Reviews", url: "/anime/review" }
+            { title: "Seasonal Anime", url: "/anime/season" }
         ],
     },
     {
@@ -19,18 +17,13 @@ export const listMenu = [
             { title: "Top Manga", url: "/manga/top" }
         ],
     },
-    // {
-    //     title: "Community",
-    //     sub_menu: [{ title: "Anime Search" }, { title: "Top Anime" }],
-    // },
-    // {
-    //     title: "Industry",
-    //     sub_menu: [{ title: "Anime Search" }, { title: "Top Anime" }],
-    // },
-    // {
-    //     title: "Watch",
-    //     sub_menu: [{ title: "Anime Search" }, { title: "Top Anime" }],
-    // },
+    ,
+    {
+        title: "Character",
+        sub_menu: [
+            { title: "Top Character", url: "/character/top" }
+        ],
+    }
 ];
 
 export const listType = [
@@ -409,5 +402,56 @@ export const listSkeletonInformation = [
     },
     {
         no: 15
+    }
+]
+
+export const listSkeletonGenre = [
+    {
+        no: 1,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 2,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 3,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 4,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 5,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 6,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 7,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 8,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 9,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 10,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 11,
+        className: 'skeleton w-full h-[14px] my-2'
+    },
+    {
+        no: 12,
+        className: 'skeleton w-full h-[14px] my-2'
     }
 ]

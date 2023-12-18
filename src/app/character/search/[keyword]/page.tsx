@@ -10,7 +10,7 @@ import {
 } from "@/components";
 import { getData } from "@/libs";
 import { scroolTop } from "@/utils";
-import { listType, listRating, listStatus, listSkeletonPage } from "@/data";
+import { listTypeManga, listRating, listStatusManga, listSkeletonPage } from "@/data";
 
 interface props {
 	params: {
@@ -20,11 +20,7 @@ interface props {
 
 const Page = ({ params }: props) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [type, setType] = useState<string>("");
-	const [rating, setRating] = useState<string>("");
-	const [status, setStatus] = useState<string>("");
-	const [genre, setGenre] = useState<string>("");
-	const [anime, setAnime] = useState<any>([]);
+	const [character, setCharacter] = useState<any>([]);
 	const [page, setPage] = useState<number>(1);
 	const [totalPage, setTotalPage] = useState<number>(1);
 	const [totalData, setTotalData] = useState<number>(0);
@@ -32,21 +28,17 @@ const Page = ({ params }: props) => {
 	useEffect(() => {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, type, rating, status]);
+	}, [page]);
 
 	const fetchData = async () => {
 		setIsLoading(true);
 		scroolTop();
-		const animeSearch = await getData(
-			`anime?limit=${15}&page=${page}${
-				type !== "" ? `&type=${type}` : ""
-			}${rating !== "" ? `&rating=${rating}` : ""}${
-				status !== "" ? `&status=${status}` : ""
-			}`
+		const characterSearch = await getData(
+			`characters?q=${params.keyword}&limit=${15}&page=${page}`
 		);
-		setTotalPage(animeSearch.pagination.last_visible_page);
-		setAnime(animeSearch);
-		setTotalData(animeSearch.pagination.items.total);
+		setTotalPage(characterSearch.pagination.last_visible_page);
+		setCharacter(characterSearch);
+		setTotalData(characterSearch.pagination.items.total);
 		setIsLoading(false);
 	};
 
@@ -58,38 +50,7 @@ const Page = ({ params }: props) => {
 						<div className='grid grid-cols-1 gap-2 bg-base-100 w-full rounded-t-lg p-2'>
 							<div className='w-full text-center'>
 								<h5 className='lg:pl-6 md:pl-6 font-semibold lg:text-xl md:text-base text-sm'>
-									Anime
-								</h5>
-							</div>
-						</div>
-						<div className='grid lg:grid-cols-4 grid-cols-2 sm:grid-cols-2 gap-2 bg-base-100'>
-							<div className="w-full text-center">
-								<DropdownType
-									setPage={setPage}
-									setData={setType}
-									value={type}
-									listData={listType}
-								/>
-							</div>
-							<div className="w-full text-center">
-								<DropdownType
-									setPage={setPage}
-									setData={setStatus}
-									value={status}
-									listData={listStatus}
-								/>
-							</div>
-							<div className="w-full text-center">
-								<DropdownType
-									setPage={setPage}
-									setData={setRating}
-									value={rating}
-									listData={listRating}
-								/>
-							</div>
-							<div className='w-full text-center'>
-								<h5 className='font-semibold lg:text-xl md:text-base text-sm'>
-									Total: {totalData}
+									Search {decodeURI(params.keyword)}
 								</h5>
 							</div>
 						</div>
@@ -98,7 +59,7 @@ const Page = ({ params }: props) => {
 								<Skeleton dataSkeleton={listSkeletonPage} />
 							</div>
 						) : (
-							<ListPage data={anime} page="anime" />
+							<ListPage data={character} page="character" />
 						)}
 					</div>
 				</div>
