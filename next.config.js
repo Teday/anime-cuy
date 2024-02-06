@@ -6,13 +6,13 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
 	reactStrictMode: false,
 	env: {
-		base_url: "https://api.jikan.moe/v4",
+		base_url: process.env.base_url,
 	},
 	images: {
         unoptimized: true,
         remotePatterns: [
             {
-                hostname: "cdn.myanimelist.net"
+                hostname: process.env.hostname
             }
         ]
     }

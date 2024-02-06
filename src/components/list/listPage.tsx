@@ -39,7 +39,7 @@ export const ListPage = ({ data, page }: props) => {
 									{page === "character" ? res.name : res.title}
 								</h2>
 								{page === "character" ? (
-									<>{ res.about.split('\n').map( (text: any, idx: number) => {
+									<>{ res.about === null ? "-" : res.about.split('\n').map( (text: any, idx: number) => {
 										return(
 											<p className='text-[10px] text-gray-300 m-0' key={idx}>{text}</p>
 										)
